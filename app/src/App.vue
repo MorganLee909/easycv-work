@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue'
+import '../src/assets/css/main.scss'
+import WizzardView from './components/WizzardView.vue'
 
 // @Options({
 //   components: {
@@ -11,19 +12,23 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <WizzardView />
+  <!-- <HeaderMain/> -->
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- <HelloWorld :msg="Welcome"/> -->
-    <HelloWorld msg="something like or that"/>
+  <!-- <HelloWorld msg="something like or that"/> -->
 
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@font-face {
+  font-family: 'Inter', sans-serif;
+  src: url(@/assets/fonts/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
 }
+  #app {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
 </style>
