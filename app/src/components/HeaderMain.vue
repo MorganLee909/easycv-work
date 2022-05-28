@@ -9,8 +9,6 @@
 </template>
 
 <style scoped lang="scss">
-  @import '@/assets/css/main.scss';
-
   .main-header{
     display: flex;
     justify-content: space-between;
