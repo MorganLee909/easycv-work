@@ -1,24 +1,33 @@
 <script setup lang="ts">
 
+import { ref } from 'vue'
+
+const isShowSecondRow = ref(false)
+const isShowGetStarted = ref(false)
+
+setTimeout(() => {
+  isShowSecondRow.value = true
+}, 1000)
+
+setTimeout(() => {
+  isShowGetStarted.value = true
+}, 2500)
+
 </script>
 
 <template>
   <div class="container-moto">
     <p class="moto colorBlack">Create the Best CV</p>
     <div class="second-row-container">
-      <p class="moto colorGreen">in just Several <br> Clicks</p>
-      <p class="get-started"> Get Started --> </p>
+      <p :class="{ moveBottom: isShowSecondRow }" class="moto colorGreen">in just Several <br> Clicks</p>
+      <p :class="{ showGetStarted: isShowGetStarted }" class="get-started"> Get Started --> </p>
     </div>
-
   </div>
 </template>
 
 <style lang="scss" scoped>
   .container-moto{
     display: block;
-    // justify-content: center;
-    // height: 100vh;
-    // flex-flow: column;
   }
 
   .second-row-container{
@@ -38,43 +47,20 @@
   .colorBlack{
     color: $black;
     position: relative;
-    animation: firstBlock 1500ms;
-    // animation-delay: 0.5s;
+    animation: firstBlock 1000ms;
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    // transition: visibility 0s, opacity 0.5s linear;
   }
 
     .colorGreen{
-    // display: inline-block;
     position: relative;
-    transform: translateY(0%);
+    transform: translateY(-100%);
     color: $primary;
-    animation: secondBlock 1500ms ;
-    // animation: secondBlock 1200ms;
-    // animation-delay: 2s;
-    // animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    // transition: opacity 5s, transform 5s;
-    // transition: visibility 0s, opacity 5s linear;
-
-  // &:before{
-  //   overflow: hidden;
-  //   top: -220px;
-  //   transition: all 1s;
-  // }
-
-  // &:after{
-  //   overflow: visible;
-  //   top: 0px;
-  //   transition: width 1s ease-in-out;
-  // }
-
+    transition: all 1.25s;
   }
 
-  // @for $i from 1 through 2 {
-  //     .moto {
-  //         animation-delay: #{$i * 2.5}s;
-  //     }
-  // }
+  .moveBottom{
+    transform: translateY(0%)
+  }
 
   @keyframes firstBlock {
     0% {
@@ -86,23 +72,12 @@
       top: 0px
       }
   }
-
-  @keyframes secondBlock {
-    0% {
-      opacity: 0;
-      transform: translateY(-100%);
-      // transform: scaleX(10%);
-      // top: -100%;
-      }
-    100% {
-      // transform: scaleX(100%);
-      opacity: 1;
-      // top: 0px
-      // width: 100%;
-      }
+  .showGetStarted{
+    opacity: 1 !important;
   }
 
   .get-started{
+    opacity: 0;
     position: relative;
     height: 60px;
     top: -109px;
@@ -111,21 +86,15 @@
     font-size: 20px;
     color: $black;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.5s;
 
-  &:hover{
-    color: $primaryHover;
-    // letter-spacing: 2px;
-    padding-left: 16px;
+    &:hover{
+      color: $primaryHover;
+      padding-left: 16px;
+    }
 
-    // -webkit-transform: translateX(3px);
-    // transform: translateX(3px);
-    // left: 4px;
-  }
-
-  &:after{
-    right: 4px;
-  }
-
+    &:after{
+      right: 4px;
+    }
   }
 </style>
