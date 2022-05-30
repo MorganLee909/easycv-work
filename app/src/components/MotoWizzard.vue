@@ -7,11 +7,11 @@ const isShowGetStarted = ref(false)
 
 setTimeout(() => {
   isShowSecondRow.value = true
-}, 1000)
+}, 2000)
 
 setTimeout(() => {
   isShowGetStarted.value = true
-}, 2500)
+}, 4000)
 
 </script>
 
@@ -47,8 +47,8 @@ setTimeout(() => {
   .colorBlack{
     color: $black;
     position: relative;
-    animation: firstBlock 1000ms;
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    animation: firstBlock 2000ms;
+    animation-timing-function: ease-out;
   }
 
     .colorGreen{
