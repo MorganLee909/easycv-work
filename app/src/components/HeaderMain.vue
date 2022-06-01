@@ -3,8 +3,11 @@
 
 <template>
   <header class="main-header">
-    <img src="../assets/easyCVworkLogo.svg">
-    <p class="sign-in"> Sign In </p>
+    <a href="#/">
+      <img src="../assets/easyCVworkLogo.svg">
+    </a>
+
+    <a href="#/sign-in" class="sign-in"> Sign In </a>
   </header>
 </template>
 
@@ -21,6 +24,7 @@
   .sign-in{
     font-weight: 600;
     font-size: 14px;
+    text-decoration: none;
     color: $primary;
     cursor: pointer;
 

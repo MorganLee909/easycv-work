@@ -7,11 +7,11 @@ const isShowGetStarted = ref(false)
 
 setTimeout(() => {
   isShowSecondRow.value = true
-}, 2000)
+}, 900)
 
 setTimeout(() => {
   isShowGetStarted.value = true
-}, 4000)
+}, 1500)
 
 </script>
 
@@ -20,7 +20,7 @@ setTimeout(() => {
     <p class="moto colorBlack">Create the Best CV</p>
     <div class="second-row-container">
       <p :class="{ moveBottom: isShowSecondRow }" class="moto colorGreen">in just Several <br> Clicks</p>
-      <p :class="{ showGetStarted: isShowGetStarted }" class="get-started"> Get Started --> </p>
+      <a href="#/sign-up"  :class="{ showGetStarted: isShowGetStarted }" class="get-started"> Get Started --> </a>
     </div>
   </div>
 </template>
@@ -47,15 +47,15 @@ setTimeout(() => {
   .colorBlack{
     color: $black;
     position: relative;
-    animation: firstBlock 2000ms;
+    animation: firstBlock 800ms;
     animation-timing-function: ease-out;
   }
 
-    .colorGreen{
+  .colorGreen{
     position: relative;
     transform: translateY(-100%);
     color: $primary;
-    transition: all 1.25s;
+    transition: all 0.25s;
   }
 
   .moveBottom{
@@ -64,11 +64,9 @@ setTimeout(() => {
 
   @keyframes firstBlock {
     0% {
-      opacity: 0;
       top: -100%;
       }
     100% {
-      opacity: 1;
       top: 0px
       }
   }
@@ -80,10 +78,11 @@ setTimeout(() => {
     opacity: 0;
     position: relative;
     height: 60px;
-    top: -109px;
+    top: -72px;
     padding-top: 20px;
     font-weight: 600;
     font-size: 20px;
+    text-decoration: none;
     color: $black;
     cursor: pointer;
     transition: all 0.5s;
