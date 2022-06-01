@@ -4,5 +4,5 @@ module.exports = (app)=>{
     app.get("/api", (req, res)=>{return res.sendFile(`${__dirname}/api.html`)});
 
     //ACCOUNT CREATION
-    app.post("/api/user/", home.createUser);
+    app.post("/api/user", home.createUser);
 }
