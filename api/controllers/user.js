@@ -1,6 +1,7 @@
 const User = require("../models/user.js");
+const Cv = require("../models/cv.js");
 
-const helper = require("./helper.js");
+const helper = require("../helper.js");
 const bcrypt = require("bcryptjs");
 
 module.exports = {
@@ -25,16 +26,29 @@ module.exports = {
                 let salt = bcrypt.genSaltSync(10);
                 let hash = bcrypt.hashSync(req.body.password, salt);
 
+                let newCv = new Cv({
+                    jobTitle: "",
+                    jobCategory: "",
+                    experience: 0,
+                    skills: [],
+                    workHistory: []
+                });
+
                 let newUser = new User({
                     email: email,
                     password: hash,
                     firstName: req.body.firstName,
-                    lastName: req.body.lastName
+                    lastName: req.body.lastName,
+                    languages: [],
+                    skills: [],
+                    cvs: [newCv],
+                    session: helper.createId(25)
                 });
 
                 return newUser.save();
             })
             .then((user)=>{
+                req.session.user = user.session;
                 return res.json(user);
             })
             .catch((err)=>{

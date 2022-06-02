@@ -14,7 +14,7 @@ const cvSchema = mongoose.Schema({
         min: 0,
         required: true
     },
-    skills: 
+    skills: [String],
     workHistory: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "employer"

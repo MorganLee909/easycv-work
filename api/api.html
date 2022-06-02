@@ -7,17 +7,41 @@
     <body>
         <h1>API Docs for easycv.work</h1>
 
-        <h2>- - - /api/user - - -</h2>
-        <code>POST</code>
-        <h3>User Creation</h3>
-        <code>body = {
-            <ul>
-                <li>firstName: (String) user first name</li>
-                <li>lastName: (String) user last name</li>
-                <li>email: (String) user email, must be unique</li>
-                <li>password (String) user password, minumum 10 characters</li>
-            </ul>
-            }
-        </code>
+        <div class="route">
+            <h2>- - - /api/user - - -</h2>
+            <code>POST</code>
+            <h3>User Creation</h3>
+            <p>Creates a new user. User is logged in once created.</p>
+            <code>body = {
+                <ul>
+                    <li>firstName: (String) user first name</li>
+                    <li>lastName: (String) user last name</li>
+                    <li>email: (String) user email, must be unique</li>
+                    <li>password (String) user password, minumum 10 characters</li>
+                </ul>
+                }
+            </code>
+            <code>response = User</code>
+        </div>
+
+        <div class="route">
+            <h2>- - - /api/employer - - -</h2>
+            <code>POST</code>
+            <h3>Employer creation</h3>
+            <p>Create new employers (work history) and then adds them to the provided CV.</p>
+            <code>body = {
+                <ul>
+                    <li>cv: (String) id of cv to add employers to</li>
+                    <li>employers: [{
+                        <ul>
+                            <li>name: (String) employer name</li>
+                            <li>startDate: (Date) date</li>
+                        </ul>
+                        }]
+                    </li>
+                </ul>
+                }
+            </code>
+        </div>
     </body>
 </html>
