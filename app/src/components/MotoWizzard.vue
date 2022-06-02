@@ -55,7 +55,7 @@ setTimeout(() => {
     position: relative;
     transform: translateY(-100%);
     color: $primary;
-    transition: all 0.25s;
+    transition: all 0.75s;
   }
 
   .moveBottom{
@@ -75,10 +75,10 @@ setTimeout(() => {
   }
 
   .get-started{
-    opacity: 0;
     position: relative;
     height: 60px;
     top: -72px;
+    left: 364px;
     padding-top: 20px;
     font-weight: 600;
     font-size: 20px;

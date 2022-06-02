@@ -38,6 +38,6 @@ const currentView = computed(() => {
     // font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
+    // text-align: center;
   }
 </style>
