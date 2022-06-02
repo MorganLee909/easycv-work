@@ -1,12 +1,14 @@
 $primary: #4EAB4F;
 $primaryHover: #28B22A;
 $black: #000000;
-$lightGray: #EBEDED;
-$middleGrey: #C2C2C2;
-$secondGrey: #ececec;
 $grey: #7A7A7A;
+$lightGrey: #DADADA;
+$middleGrey: #C2C2C2;
+$secondGrey: #EBEDED;
+
+$white: #ffffff;
 
 :root{
-  background-color: $lightGray;
+  background-color: $secondGrey;
   margin: 0;
 }

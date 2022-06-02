@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults, defineEmits, ref } from 'vue'
+import { defineProps, withDefaults, defineEmits } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -51,13 +51,13 @@ const updateInputValue = (e: Event) => {
 <style scoped lang="scss">
 input{
   height: 50px;
-  background: #FFFFFF;
+  background: $white;
   box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
   text-align: left;
   outline: none;
   border: none;
-  border: 1px solid $secondGrey;
+  border: 1px solid $lightGrey;
   padding-left: 10px;
   font-size: 16px;
 }
@@ -88,7 +88,8 @@ input{
 }
 
 input[type=text]:focus + label,
-input[type=email]:focus + label
+input[type=email]:focus + label,
+input[type=password]:focus + label
 
 {
   font-size: 14px;
@@ -96,18 +97,26 @@ input[type=email]:focus + label
   transform: translateY(-52px);
 }
 
-input[type=text]:valid + label {
-  transform: translateY(-52px);
-  font-size: 14px;
-  color: $grey;
-}
-
-input[type=text]:focus, input[type=text]:hover{
+input[type=text]:focus, input[type=text]:hover,
+input[type=email]:focus, input[type=email]:hover,
+input[type=password]:focus, input[type=password]:hover
+{
   border: 1px solid $primary;
 }
-input[type=text]:valid + label, input[type=email]:valid + label {
+
+//visited
+input[type=text]:visited, input[type=email]:visited,
+input[type=password]:visited
+{
+    background: $white;
+}
+
+input[type=text]:valid + label, input[type=email]:valid + label,
+input[type=password]:valid + label
+{
     transform: translateY(-52px);
     font-size: 14px;
     color: $grey;
 }
+
 </style>

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const typing = ref()
 </script>
@@ -12,23 +13,23 @@ const typing = ref()
     <form class="signUpForm">
       <h1 class="title-tell-us"> Tell Us About Yourselft {{ typing }}</h1>
 
-    <div class="firstlastName">
-      <base-input
-        id="123"
-        class="input-short"
-        type="text"
-        label="Given Name"
-        v-model="givenName"
-      />
+      <div class="firstlastName">
+        <base-input
+          id="123"
+          class="input-short"
+          type="text"
+          label="Given Name"
+          v-model="givenName"
+        />
 
-      <base-input
-        id='456'
-        class='input-short'
-        type='text'
-        label='Last Name'
-        v-model='lastName'
-      />
-    </div>
+        <base-input
+          id='456'
+          class='input-short'
+          type='text'
+          label='Last Name'
+          v-model='lastName'
+        />
+      </div>
 
       <base-input
         id='789'
@@ -39,7 +40,7 @@ const typing = ref()
       />
 
       <base-input
-        id='789'
+        id='11'
         class='input-long'
         type='email'
         label='Email'
@@ -47,12 +48,17 @@ const typing = ref()
       />
 
       <base-input
-        id='789'
+        id='12'
         class='input-long'
-        type='text'
+        type='password'
         label='Password'
         v-model='password'
       />
+
+      <base-button
+        label="Next"
+        class="primary-btn"
+       />
   </form>
 
 </template>

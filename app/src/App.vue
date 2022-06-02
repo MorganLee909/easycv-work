@@ -39,5 +39,10 @@ const currentView = computed(() => {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     // text-align: center;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
   }
 </style>
