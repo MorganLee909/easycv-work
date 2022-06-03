@@ -75,6 +75,7 @@ setTimeout(() => {
   }
 
   .get-started{
+    opacity: 0;
     position: relative;
     height: 60px;
     top: -72px;
