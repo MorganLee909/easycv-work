@@ -6,6 +6,49 @@ const bcrypt = require("bcryptjs");
 
 module.exports = {
     /*
+    POST: login a user
+    req.body = {
+        email: String
+        password: String
+    }
+    response = {}
+    */
+    login: function(req, res){
+        let u = {};
+        User.findOne({email: req.body.email.toString()})
+            .then((user)=>{
+                if(!user) throw "user";
+                u = user;
+
+                return bcrypt.compare(req.body.password, user.password);
+            })
+            .then((result)=>{
+                if(!result) throw "password";
+
+                req.session.user = u.session;
+
+                return res.json({});
+            })
+            .catch((err)=>{
+                switch(err){
+                    case "user": return res.json("User with that email doesn't exist");
+                    case "password": return res.json("Incorrect password");
+                    default:
+                        console.error(err);
+                        return res.json("ERROR: unable to login user");
+                }
+            });
+    },
+
+    /*
+    GET: log out a user
+    */
+    logout: function(req, res){
+        req.session.user = undefined;
+        return res.json({});
+    },
+
+    /*
     POST: initial user creation
     req.body = {
         firstName: String
@@ -13,8 +56,9 @@ module.exports = {
         email: String
         password: String
     }
+    response = User
     */
-    createUser: function(req, res){
+    create: function(req, res){
         let email = req.body.email.toLowerCase();
         if(req.body.password.length < 10) return res.json("Password must contain at least 10 characters");
         if(helper.validEmail(email) === false) return res.json("Invalid email");
@@ -67,45 +111,37 @@ module.exports = {
     },
 
     /*
-    POST: login a user
+    PUT: update user data
     req.body = {
         email: String
-        password: String
+        firstName: String
+        lastName: String
+        languages: [{
+            name: String
+            level: String
+        }]
+        skills: [String]
     }
-    response = {}
     */
-    login: function(req, res){
-        let u = {};
-        User.findOne({email: req.body.email.toString()})
+    update: function(req, res){
+        let u = res.locals.user;
+        if(req.body.email) u.email = req.body.email;
+        if(req.body.firstName) u.firstName = req.body.firstName;
+        if(req.body.lastName) u.lastName = req.body.lastName;
+
+        if(req.body.languages) u.languages = req.body.languages;
+        if(req.body.skills) u.skills = req.body.skills;
+
+        u.save()
             .then((user)=>{
-                if(!user) throw "user";
-                u = user;
+                user.password = undefined;
+                user.session = undefined;
 
-                return bcrypt.compare(req.body.password, user.password);
-            })
-            .then((result)=>{
-                if(!result) throw "password";
-
-                req.session.user = u.session;
-
-                return res.json({});
+                return res.json(user);
             })
             .catch((err)=>{
-                switch(err){
-                    case "user": return res.json("User with that email doesn't exist");
-                    case "password": return res.json("Incorrect password");
-                    default:
-                        console.error(err);
-                        return res.json("ERROR: unable to login user");
-                }
+                console.error(err);
+                return res.json("ERROR: unable to update user data");
             });
-    },
-
-    /*
-    GET: log out a user
-    */
-    logout: function(req, res){
-        req.session.user = undefined;
-        return res.json({});
     }
 }

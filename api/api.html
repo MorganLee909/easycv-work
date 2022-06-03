@@ -8,23 +8,6 @@
         <h1>API Docs for easycv.work</h1>
 
         <div class="route">
-            <h2>- - - /api/user - - -</h2>
-            <code>POST</code>
-            <h3>User Creation</h3>
-            <p>Creates a new user. User is logged in once created.</p>
-            <code>body = {
-                <ul>
-                    <li>firstName: (String) user first name</li>
-                    <li>lastName: (String) user last name</li>
-                    <li>email: (String) user email, must be unique</li>
-                    <li>password (String) user password, minumum 10 characters</li>
-                </ul>
-                }
-            </code>
-            <code>response = User</code>
-        </div>
-
-        <div class="route">
             <h2>- - - /api/login - - -</h2>
             <code>POST</code>
             <h3>User login</h3>
@@ -45,6 +28,46 @@
             <h3>User logout</h3>
             <p>Logs out the user</p>
             <code>response = {}</code>
+        </div>
+
+        <div class="route">
+            <h2>- - - /api/user - - -</h2>
+            <code>POST</code>
+            <h3>User Creation</h3>
+            <p>Creates a new user. User is logged in once created.</p>
+            <code>body = {
+                <ul>
+                    <li>firstName: (String) user first name</li>
+                    <li>lastName: (String) user last name</li>
+                    <li>email: (String) user email, must be unique</li>
+                    <li>password (String) user password, minumum 10 characters</li>
+                </ul>
+                }
+            </code>
+            <code>response = User</code>
+        </div>
+
+        <div class="route">
+            <h2>- - - /api/user - - -</h2>
+            <code>PUT</code>
+            <h3>Update user</h3>
+            <p>Updates many of the user details. NOTE: for languages and skill, if the it is undefiined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
+            <code>body = {
+                <ul>
+                    <li>email: (String, optional) new email address</li>
+                    <li>firstName: (String, optional) new first name</li>
+                    <li>lastName: (String, optional) new last name</li>
+                    <li>languages: (Optional)[{ 
+                        <ul>
+                            <li>name: (String, optional) language name</li>
+                            <li>level: (String, optional) language level</li>
+                        </ul>
+                        }]
+                    </li>
+                    <li>skills: ([String], Optional) user skills, must contain all skills, new and old</li>
+                </ul>
+                }
+            </code>
         </div>
 
         <div class="route">
