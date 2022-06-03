@@ -1,15 +1,12 @@
 <template>
   <div class="input-container">
-    <!-- <label v-if="label" :for="id" class="">
-      {{ label }}
-    </label> -->
 
     <input
       :id="id"
       :type="type"
-      :value="modelValue"
       @input='updateInputValue'
       class=""
+      v-model="watchInpute"
       required
     />
 
@@ -20,31 +17,48 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults, defineEmits } from 'vue'
+import { defineProps, withDefaults, defineEmits, ref, onMounted, watch } from 'vue'
+
+const watchInpute = ref('')
 
 const props = withDefaults(
   defineProps<{
       id?: string
       label?: string
       type?: string
-      modelValue?: string
     }>(),
   {
     id: '',
     label: '',
-    type: 'text',
-    modelValue: ''
+    type: 'text'
   }
 )
 
-const emit = defineEmits<{(e: 'update:modelValue', value: string): void;
-  }>()
+watch(watchInpute, async (watchInputeNewValue) => {
+  if (props.type === 'email') {
+    console.log('props.type-email', props.type)
+  }
+  if (props.type === 'text') {
+    console.log('props.type-text', props.type)
+  }
+  if (props.type === 'password') {
+    console.log('props.type-password', props.type)
+  }
+  console.log('watchInputeNewValue', watchInputeNewValue, 'watchInpute', watchInpute.value)
+})
+// const inputValue = ref(myInput)
+// const inputValue2 = computed(() => props.modelValue)
 
-const updateInputValue = (e: Event) => {
-  const target = e.target as HTMLInputElement
-  emit('update:modelValue', target.value)
-  console.log('target.value', target.value, 'props.modelValue', props.modelValue)
-}
+// console.log('inputValue2', inputValue2)
+
+// const emit = defineEmits<{(e: 'update:modelValue', value: string): void;
+//   }>()
+
+// const updateInputValue = (e: Event) => {
+//   const target = e.target as HTMLInputElement
+//   emit('update:modelValue', target.value)
+//   console.log('target.value', target.value, 'target.type', target.type)
+// }
 
 </script>
 

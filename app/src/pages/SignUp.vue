@@ -4,18 +4,17 @@ import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
-const typing = ref()
+const givenName = ref()
 </script>
 
 <template>
   <header-main />
 
     <form class="signUpForm">
-      <h1 class="title-tell-us"> Tell Us About Yourselft {{ typing }}</h1>
+      <h1 class="title-tell-us"> Tell Us About Yourselft {{ givenName }}</h1>
 
       <div class="firstlastName">
         <base-input
-          id="123"
           class="input-short"
           type="text"
           label="Given Name"
@@ -23,36 +22,28 @@ const typing = ref()
         />
 
         <base-input
-          id='456'
           class='input-short'
           type='text'
           label='Last Name'
-          v-model='lastName'
         />
       </div>
 
       <base-input
-        id='789'
         class='input-long'
         type='text'
         label='Job Position'
-        v-model='jobPositioin'
       />
 
       <base-input
-        id='11'
         class='input-long'
         type='email'
         label='Email'
-        v-model='email'
       />
 
       <base-input
-        id='12'
         class='input-long'
         type='password'
         label='Password'
-        v-model='password'
       />
 
       <base-button
