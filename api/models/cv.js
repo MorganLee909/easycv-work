@@ -16,8 +16,19 @@ const cvSchema = mongoose.Schema({
     },
     skills: [String],
     workHistory: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "employer"
+        employer: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "employer"
+        },
+        startDate: {
+            type: Date,
+            required: true
+        },
+        endDate: Date,
+        description: {
+            type: String,
+            required: true
+        }
     }]
 });
 

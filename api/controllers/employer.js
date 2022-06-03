@@ -25,12 +25,17 @@ module.exports = {
                 for(let i = 0; i < req.body.employers.length; i++){
                     let employer = new Employer({
                         name: req.body.name,
-                        startDate : new Date(req.body.startDate);
+                        startDate : new Date(req.body.startDate),
                         endDate: req.body.endDate ? new Date(req.body.endDate) : null,
                         description: req.body.description
                     });
 
-                    cv.workHistory.push(employer);
+                    cv.workHistory.push({
+                        employer: employer._id,
+                        startDate: new Date(req.body.startDate),
+                        endDate: req.body.endDate ? new Date(req.body.endDate) : null,
+                        description: req.body.description
+                    });
                     employers.push(employer);
                 }
                 
