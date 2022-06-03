@@ -20,34 +20,38 @@ module.exports = {
         
         Cv.findOne({_id: req.body.cv})
             .then((cv)=>{
+                if(!cv) throw "cv";
                 let employers = [];
 
                 for(let i = 0; i < req.body.employers.length; i++){
+                    let e = req.body.employers[i];
+
                     let employer = new Employer({
-                        name: req.body.name,
-                        startDate : new Date(req.body.startDate),
-                        endDate: req.body.endDate ? new Date(req.body.endDate) : null,
-                        description: req.body.description
+                        name: e.name
                     });
 
                     cv.workHistory.push({
                         employer: employer._id,
-                        startDate: new Date(req.body.startDate),
-                        endDate: req.body.endDate ? new Date(req.body.endDate) : null,
-                        description: req.body.description
+                        startDate: new Date(e.startDate),
+                        endDate: e.endDate ? new Date(e.endDate) : null,
+                        description: e.description
                     });
                     employers.push(employer);
                 }
                 
                 cv.save().catch((err)=>{console.error(err)});
-                return employers.save();
+                return Employer.insertMany(employers);
             })
             .then((employers)=>{
                 return res.json(employers);
             })
             .catch((err)=>{
-                console.error(err);
-                return res.json("ERROR: unable to add new employers");
+                switch(err){
+                    case "cv": return res.json("That CV does not exist");
+                    default:
+                        console.error(err);
+                        return res.json("ERROR: unable to add new employers");
+                }
             });
     }
 }

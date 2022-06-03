@@ -8,6 +8,8 @@ module.exports = (app)=>{
 
     //USER
     app.post("/api/user", user.createUser);
+    app.post("/api/login", user.login);
+    app.get("/api/logout", user.logout);
 
     //EMPLOYER
     app.post("/api/employer", mid.user, employer.newEmployers);

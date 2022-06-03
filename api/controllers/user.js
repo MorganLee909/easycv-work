@@ -41,14 +41,19 @@ module.exports = {
                     lastName: req.body.lastName,
                     languages: [],
                     skills: [],
-                    cvs: [newCv],
+                    cvs: [newCv._id],
                     session: helper.createId(25)
                 });
 
+                newCv.save();
                 return newUser.save();
             })
             .then((user)=>{
                 req.session.user = user.session;
+
+                user.session = undefined;
+                user.password = undefined;
+
                 return res.json(user);
             })
             .catch((err)=>{
@@ -59,5 +64,48 @@ module.exports = {
                         return res.json("ERROR: unable to create new user");
                 }
             });
+    },
+
+    /*
+    POST: login a user
+    req.body = {
+        email: String
+        password: String
+    }
+    response = {}
+    */
+    login: function(req, res){
+        let u = {};
+        User.findOne({email: req.body.email.toString()})
+            .then((user)=>{
+                if(!user) throw "user";
+                u = user;
+
+                return bcrypt.compare(req.body.password, user.password);
+            })
+            .then((result)=>{
+                if(!result) throw "password";
+
+                req.session.user = u.session;
+
+                return res.json({});
+            })
+            .catch((err)=>{
+                switch(err){
+                    case "user": return res.json("User with that email doesn't exist");
+                    case "password": return res.json("Incorrect password");
+                    default:
+                        console.error(err);
+                        return res.json("ERROR: unable to login user");
+                }
+            });
+    },
+
+    /*
+    GET: log out a user
+    */
+    logout: function(req, res){
+        req.session.user = undefined;
+        return res.json({});
     }
 }

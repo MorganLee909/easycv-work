@@ -1,14 +1,8 @@
 const mongoose = require("mongoose");
 
 const cvSchema = mongoose.Schema({
-    jobTitle: {
-        type: String,
-        required: true
-    },
-    jobCategory: {
-        type: String,
-        required: true
-    },
+    jobTitle: String,
+    jobCategory: String,
     experience: {
         type: Number,
         min: 0,

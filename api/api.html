@@ -25,6 +25,29 @@
         </div>
 
         <div class="route">
+            <h2>- - - /api/login - - -</h2>
+            <code>POST</code>
+            <h3>User login</h3>
+            <p>Logs in the user</p>
+            <code>body = {
+                <ul>
+                    <li>email: (String) user email</li>
+                    <li>password: (String) user password</li>
+                </ul>
+                }
+            </code>
+            <code>response = {}</code>
+        </div>
+
+        <div class="route">
+            <h2>- - - /api/logout - - -</h2>
+            <code>GET</code>
+            <h3>User logout</h3>
+            <p>Logs out the user</p>
+            <code>response = {}</code>
+        </div>
+
+        <div class="route">
             <h2>- - - /api/employer - - -</h2>
             <code>POST</code>
             <h3>Employer creation</h3>
@@ -42,6 +65,7 @@
                 </ul>
                 }
             </code>
+            <code>response = [Cv]</code>
         </div>
     </body>
 </html>

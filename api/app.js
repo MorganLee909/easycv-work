@@ -33,7 +33,6 @@ if(process.env.NODE_ENV === "production"){
     mongooseOptions.pass = process.env.MONGODB_PASS;
 }
 
-app.use(express.static(`${__dirname}/views/index.html`));
 app.use(compression());
 app.use(express.json());
 app.use(session({
@@ -42,6 +41,7 @@ app.use(session({
     saveUninitialized: true,
     resave: false
 }));
+app.use(express.static(`${__dirname}/views/index.html`));
 
 mongoose.connect("mongodb://127.0.0.1/easycv", mongooseOptions);
 
