@@ -51,14 +51,16 @@
             <h2>- - - /api/employer - - -</h2>
             <code>POST</code>
             <h3>Employer creation</h3>
-            <p>Create new employers (work history) and then adds them to the provided CV.</p>
+            <p>Creates new employers (work history) and then adds them to the provided CV.</p>
             <code>body = {
                 <ul>
                     <li>cv: (String) id of cv to add employers to</li>
                     <li>employers: [{
                         <ul>
                             <li>name: (String) employer name</li>
-                            <li>startDate: (Date) date</li>
+                            <li>startDate: (Date) date of start of employment</li>
+                            <li>endDate: (Date) date of end of employment. If current, ignore or use falsey value</li>
+                            <li>description: (String) description of employment</li>
                         </ul>
                         }]
                     </li>
