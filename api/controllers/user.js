@@ -89,6 +89,8 @@ module.exports = {
                     session: helper.createId(25)
                 });
 
+                newCv.user = newUser._id;
+
                 newCv.save();
                 return newUser.save();
             })

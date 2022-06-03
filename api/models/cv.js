@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const cvSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    },
     jobTitle: String,
     jobCategory: String,
     experience: {

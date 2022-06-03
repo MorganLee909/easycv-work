@@ -34,7 +34,7 @@
             <h2>- - - /api/user - - -</h2>
             <code>POST</code>
             <h3>User Creation</h3>
-            <p>Creates a new user. User is logged in once created.</p>
+            <p>Creates a new user. User is logged in once created. Also creates a single, blank CV</p>
             <code>body = {
                 <ul>
                     <li>firstName: (String) user first name</li>
@@ -51,7 +51,7 @@
             <h2>- - - /api/user - - -</h2>
             <code>PUT</code>
             <h3>Update user</h3>
-            <p>Updates many of the user details. NOTE: for languages and skill, if the it is undefiined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
+            <p>Updates many of the user details. NOTE: for languages and skill, if it is undefined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
             <code>body = {
                 <ul>
                     <li>email: (String, optional) new email address</li>
@@ -68,6 +68,25 @@
                 </ul>
                 }
             </code>
+            <code>response = User</code>
+        </div>
+
+        <div class="route">
+            <h2>- - - /api/cv - - -</h2>
+            <code>PUT</code>
+            <h3>Update a CV</h3>
+            <p>Updates basic data for a CV. NOTE: for skills, if it is undefined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
+            <code>body = {
+                <ul>
+                    <li>cv: (String) id of cv to update</li>
+                    <li>jobTitle: (String, optional) job title for CV</li>
+                    <li>jobCategory: (String, optional) job category for CV</li>
+                    <li>experience: (Number, optional) years of experience in position</li>
+                    <li>skils: ([String], optional) skills applicable to CV</li>
+                </ul>
+                }
+            </code>
+            <code>response = CV</code>
         </div>
 
         <div class="route">

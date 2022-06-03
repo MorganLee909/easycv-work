@@ -15,7 +15,7 @@ module.exports = {
         }
         response = [Employer]
     */
-    newEmployers: function(req, res){
+    create: function(req, res){
         if(req.body.employers.length < 1) return res.json("Must include at least one employer");
         
         Cv.findOne({_id: req.body.cv})
