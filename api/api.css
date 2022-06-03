@@ -1,0 +1,44 @@
+:root{
+    --backColor: rgb(9, 12, 21);
+    --highlite: rgb(44, 52, 55);
+    --sidebar: rgb(13, 17, 29);
+}
+
+*{margin:0;padding:0;}
+
+body{
+    background: var(--backColor);
+    color: white;
+}
+
+h1{
+    text-align: center;
+}
+
+.route{
+    display: flex;
+    flex-direction: column;
+}
+
+.route h2{
+    background: var(--highlite);
+    margin: 35px 0 10px 0;
+    padding: 5px 0;
+}
+
+.route p{
+    margin-left: 35px;
+    font-size: 16px;
+}
+
+.method{
+    margin-right: 15px;
+}
+
+code{
+    display: inline-block;
+    margin: 10px 35px;
+    padding: 15px;
+    background: var(--highlite);
+    font-size: 16px;
+}
