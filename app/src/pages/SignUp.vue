@@ -18,13 +18,21 @@ const onChildValidation = (value, label) => {
   if (label === 'Given Name') {
     isGivenNameValid.value = value
   }
-  if (label === 'Last Name') { isLastNameValid.value = value }
-  if (label === 'Job Position') { isJobPositionValid.value = value }
-  if (label === 'Email') { isEmailValid.value = value }
-  if (label === 'Password') { isPasswordValid.value = value }
+  if (label === 'Last Name') {
+    isLastNameValid.value = value
+  }
+  if (label === 'Job Position') {
+    isJobPositionValid.value = value
+  }
+  if (label === 'Email') {
+    isEmailValid.value = value
+  }
+  if (label === 'Password') {
+    isPasswordValid.value = value
+  }
 
   isFormValid.value = formValidation()
-  console.log('isFormValid__', isFormValid.value)
+  // console.log('isFormValid__', isFormValid.value)
 }
 
 const formValidation = () => {
@@ -33,84 +41,88 @@ const formValidation = () => {
     isLastNameValid.value &&
     isJobPositionValid.value &&
     isEmailValid.value &&
-    isPasswordValid.value) {
+    isPasswordValid.value
+  ) {
     return true
   } else {
     return false
   }
 }
 
+// const onSubmit = () => {
+//   console.log('submit form')
+// }
+
+// v-on:submit.prevent="onSubmit"
 </script>
 
 <template>
   <header-main />
 
-    <form class="signUpForm">
-      <h1 class="title-tell-us"> Tell Us About Yourselft {{ givenName }}</h1>
+  <form action="/api/user" method="post" class="signUpForm">
+    <h1 class="title-tell-us">Tell Us About Yourselft {{ givenName }}</h1>
 
-      <div class="firstlastName">
-        <base-input
-          class="input-short"
-          type="text"
-          label="Given Name"
-          v-on:update:is-valid="onChildValidation"
-          v-model="givenName"
-        />
-
-        <base-input
-          class='input-short'
-          type='text'
-          label='Last Name'
-          v-on:update:is-valid="onChildValidation"
-        />
-      </div>
-
+    <div class="firstlastName">
       <base-input
-        class='input-long'
-        type='text'
-        label='Job Position'
+        class="input-short"
+        type="text"
+        label="Given Name"
         v-on:update:is-valid="onChildValidation"
       />
 
       <base-input
-        class='input-long'
-        type='email'
-        label='Email'
+        class="input-short"
+        type="text"
+        label="Last Name"
         v-on:update:is-valid="onChildValidation"
       />
+    </div>
 
-      <base-input
-        class='input-long'
-        type='password'
-        label='Password'
-        v-on:update:is-valid="onChildValidation"
-      />
+    <base-input
+      class="input-long"
+      type="text"
+      label="Job Position"
+      v-on:update:is-valid="onChildValidation"
+    />
 
-      <base-button
-        label="Next"
-        :class="{primaryBtn: isFormValid}"
-       />
+    <base-input
+      class="input-long"
+      type="email"
+      label="Email"
+      v-on:update:is-valid="onChildValidation"
+    />
+
+    <base-input
+      class="input-long"
+      type="password"
+      label="Password"
+      v-on:update:is-valid="onChildValidation"
+    />
+
+    <base-button
+      label="Next"
+      :class="{ primaryBtn: isFormValid }"
+      type="submit"
+      value="Submit"
+    />
   </form>
-
 </template>
 
 <style scoped lang="scss">
-
-.signUpForm{
+.signUpForm {
   display: flex;
-    justify-content: center;
-    flex-flow: column;
-    align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
 }
-.title-tell-us{
+.title-tell-us {
   font-weight: 700;
   font-size: 25px;
 }
 
-.firstlastName{
+.firstlastName {
   display: flex;
   width: 420px;
   justify-content: space-around;
 }
-
 </style>

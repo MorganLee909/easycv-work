@@ -96,11 +96,11 @@ const inputValidation = (inputValue) => {
 
   if (props.type === 'password') {
     if (/^(?=.*[a-z])(?=.*[A-Z]).{5,}$/.test(inputValue)) {
-      console.log('password is good')
+      // console.log('password is good')
       isValidInput.value = true
       updateInputValue()
     } else {
-      console.log('password is bad')
+      // console.log('password is bad')
       isValidInput.value = false
       updateInputValue()
     }
