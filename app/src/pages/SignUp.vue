@@ -13,8 +13,6 @@ const isLastNameValid = ref(false)
 const isJobPositionValid = ref(false)
 const isEmailValid = ref(false)
 
-// const inputArray = [isGivenNameValid.value, isLastNameValid.value, isJobPositionValid.value, isEmailValid.value]
-
 const onChildValidation = (value, label) => {
   if (label === 'Given Name') {
     isGivenNameValid.value = value
@@ -26,12 +24,7 @@ const onChildValidation = (value, label) => {
 
   isFormValid.value = formValidation()
   console.log('isFormValid__', isFormValid.value)
-  // console.log('value', value, 'label', label)
 }
-
-// const formValidation = (arr) => {
-//   return arr.every(element => element)
-// }
 
 const formValidation = () => {
   if (isGivenNameValid.value && isLastNameValid.value && isJobPositionValid.value && isEmailValid.value) {

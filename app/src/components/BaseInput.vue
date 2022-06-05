@@ -11,7 +11,6 @@
       v-model="watchInpute"
       required
     />
-      <!-- @input='updateInputValue' -->
 
     <label :class="[ activeInput ? 'inputLabelActive' : '', 'inputLabel' ]">
       {{ label }}
@@ -32,13 +31,10 @@ const onBlur = () => {
   } else {
     activeInput.value = false
   }
-
-  // console.log('activeInput.value OnBlur', activeInput.value, watchInpute.value)
 }
 
 const onFocus = () => {
   activeInput.value = true
-  // console.log('activeInput.value OnFocuse', activeInput.value, watchInpute.value)
 }
 
 const props = withDefaults(
@@ -56,21 +52,6 @@ const props = withDefaults(
     inputValue: ''
   }
 )
-
-// watch(watchInpute, async (watchInputeNewValue) => {
-//   // console.log('activeInput', activeInput.value)
-
-//   if (props.type === 'email') {
-//     // console.log('props.type-email', props.type)
-//   }
-//   if (props.type === 'text') {
-//     // console.log('props.type-text', props.type)
-//   }
-//   if (props.type === 'password') {
-//     // console.log('props.type-password', props.type)
-//   }
-//   // console.log('watchInputeNewValue', watchInputeNewValue, 'watchInpute', watchInpute.value)
-// })
 
 const doneTypingInterval = 500
 
@@ -105,7 +86,6 @@ const inputValidation = (inputValue) => {
 
   if (props.type === 'text') {
     if (inputValue.length > 1) {
-      // console.log('inputValue.length', inputValue.length)
       isValidInput.value = true
       updateInputValue()
     } else {
@@ -119,10 +99,7 @@ const emit = defineEmits<{(e: 'update:isValid', value: boolean, label: string): 
   }>()
 
 const updateInputValue = () => {
-  // const target = e.target as HTMLInputElement
-  // console.log('update value emit', isValidInput.value, props.label)
   emit('update:isValid', isValidInput.value, props.label)
-  // console.log('target.value', isValidInput.value, 'isValidInput.value')
 }
 
 </script>
