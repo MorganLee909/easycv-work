@@ -6,13 +6,12 @@
       @keydown="clearTimer"
       @focus="onFocus"
       @blur="onBlur"
-      :id="id"
       :type="type"
-      @input='updateInputValue'
       class=""
       v-model="watchInpute"
       required
     />
+      <!-- @input='updateInputValue' -->
 
     <label :class="[ activeInput ? 'inputLabelActive' : '', 'inputLabel' ]">
       {{ label }}
@@ -34,12 +33,12 @@ const onBlur = () => {
     activeInput.value = false
   }
 
-  console.log('activeInput.value OnBlur', activeInput.value, watchInpute.value)
+  // console.log('activeInput.value OnBlur', activeInput.value, watchInpute.value)
 }
 
 const onFocus = () => {
   activeInput.value = true
-  console.log('activeInput.value OnFocuse', activeInput.value, watchInpute.value)
+  // console.log('activeInput.value OnFocuse', activeInput.value, watchInpute.value)
 }
 
 const props = withDefaults(
@@ -48,6 +47,7 @@ const props = withDefaults(
       label?: string
       type?: string
       inputValue: string
+      isValid: boolean
     }>(),
   {
     id: '',
@@ -57,72 +57,73 @@ const props = withDefaults(
   }
 )
 
-watch(watchInpute, async (watchInputeNewValue) => {
-  // console.log('activeInput', activeInput.value)
+// watch(watchInpute, async (watchInputeNewValue) => {
+//   // console.log('activeInput', activeInput.value)
 
-  if (props.type === 'email') {
-    // console.log('props.type-email', props.type)
-  }
-  if (props.type === 'text') {
-    console.log('props.type-text', props.type)
-  }
-  if (props.type === 'password') {
-    console.log('props.type-password', props.type)
-  }
-  // console.log('watchInputeNewValue', watchInputeNewValue, 'watchInpute', watchInpute.value)
-})
+//   if (props.type === 'email') {
+//     // console.log('props.type-email', props.type)
+//   }
+//   if (props.type === 'text') {
+//     // console.log('props.type-text', props.type)
+//   }
+//   if (props.type === 'password') {
+//     // console.log('props.type-password', props.type)
+//   }
+//   // console.log('watchInputeNewValue', watchInputeNewValue, 'watchInpute', watchInpute.value)
+// })
 
 const doneTypingInterval = 500
 
 const doneTyping = () => {
-  // console.log('done typing', watchInpute.value)
-
-  if (props.type === 'email') {
-    checkEmail(watchInpute.value)
-  }
+  inputValidation(watchInpute.value)
 }
 
 const typingTimer = setTimeout(doneTyping, doneTypingInterval)
 
 const typingHandle = () => {
-  // console.log('typing')
-
   clearTimeout(typingTimer)
   setTimeout(doneTyping, doneTypingInterval)
 }
 
 const clearTimer = () => {
-  // console.log('clear timer')
-
   clearTimeout(typingTimer)
 }
 
-const checkEmail = (email) => {
-  // eslint-disable-next-line no-useless-escape
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-    // this.msg['email'] = 'Please enter a valid email address';
-    console.log('Good Email')
-    isValidInput.value = true
-  } else {
-    console.log('Please enter a valid email address')
-    isValidInput.value = false
+const inputValidation = (inputValue) => {
+  if (props.type === 'email') {
+    // eslint-disable-next-line no-useless-escape
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
+      // console.log('Good Email')
+      isValidInput.value = true
+      updateInputValue()
+    } else {
+      // console.log('Please enter a valid email address')
+      isValidInput.value = false
+      updateInputValue()
+    }
+  }
 
-    // this.msg['email'] = '';
+  if (props.type === 'text') {
+    if (inputValue.length > 1) {
+      // console.log('inputValue.length', inputValue.length)
+      isValidInput.value = true
+      updateInputValue()
+    } else {
+      isValidInput.value = false
+      updateInputValue()
+    }
   }
 }
-// const inputValue = ref(myInput)
-// const inputValue2 = computed(() => props.modelValue)
 
-// console.log('inputValue2', inputValue2)
+const emit = defineEmits<{(e: 'update:isValid', value: boolean, label: string): void;
+  }>()
 
-// const emit = defineEmits<{(e: 'update:modelValue', value: string): void;
-//   }>()
-
-// const updateInputValue = (e: Event) => {
-//   const target = e.target as HTMLInputElement
-//   emit('update:modelValue', target.value)
-//   console.log('target.value', target.value, 'target.type', target.type)
-// }
+const updateInputValue = () => {
+  // const target = e.target as HTMLInputElement
+  // console.log('update value emit', isValidInput.value, props.label)
+  emit('update:isValid', isValidInput.value, props.label)
+  // console.log('target.value', isValidInput.value, 'isValidInput.value')
+}
 
 </script>
 
@@ -160,26 +161,6 @@ input{
   border: 1px solid $error !important;
 }
 
-// .input-container label{
-//   position: absolute;
-//   left: 10px;
-//   bottom: 15px;
-//   font-size: 16px;
-//   color: $middleGrey;
-//   transition: .25s;
-//   pointer-events: none;
-// }
-
-// input[type=text]:focus + label,
-// input[type=email]:focus + label,
-// input[type=password]:focus + label
-
-// {
-//   font-size: 14px;
-//   color: $grey;
-//   transform: translateY(-52px);
-// }
-
 .inputLabel{
   position: absolute;
   left: 10px;
@@ -196,26 +177,11 @@ input{
   transform: translateY(-52px);
 }
 
-// input[type=text]:focus, input[type=text]:hover,
-// input[type=email]:focus, input[type=email]:hover,
-// input[type=password]:focus, input[type=password]:hover
-// {
-//   border: 1px solid $primary;
-// }
-
 //visited
 input[type=text]:visited, input[type=email]:visited,
 input[type=password]:visited
 {
     background: $white;
 }
-
-// input[type=text]:valid + label, input[type=email]:valid + label,
-// input[type=password]:valid + label
-// {
-//     transform: translateY(-52px);
-//     font-size: 14px;
-//     color: $grey;
-// }
 
 </style>

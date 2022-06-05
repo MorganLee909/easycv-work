@@ -5,6 +5,42 @@ import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
 const givenName = ref()
+
+const isFormValid = ref(false)
+
+const isGivenNameValid = ref(false)
+const isLastNameValid = ref(false)
+const isJobPositionValid = ref(false)
+const isEmailValid = ref(false)
+
+// const inputArray = [isGivenNameValid.value, isLastNameValid.value, isJobPositionValid.value, isEmailValid.value]
+
+const onChildValidation = (value, label) => {
+  if (label === 'Given Name') {
+    isGivenNameValid.value = value
+    console.log('Given Name', value, label, 'isGivenNameValid.value', isGivenNameValid.value)
+  }
+  if (label === 'Last Name') { isLastNameValid.value = value }
+  if (label === 'Job Position') { isJobPositionValid.value = value }
+  if (label === 'Email') { isEmailValid.value = value }
+
+  isFormValid.value = formValidation()
+  console.log('isFormValid__', isFormValid.value)
+  // console.log('value', value, 'label', label)
+}
+
+// const formValidation = (arr) => {
+//   return arr.every(element => element)
+// }
+
+const formValidation = () => {
+  if (isGivenNameValid.value && isLastNameValid.value && isJobPositionValid.value && isEmailValid.value) {
+    return true
+  } else {
+    return false
+  }
+}
+
 </script>
 
 <template>
@@ -18,6 +54,7 @@ const givenName = ref()
           class="input-short"
           type="text"
           label="Given Name"
+          v-on:update:is-valid="onChildValidation"
           v-model="givenName"
         />
 
@@ -25,6 +62,7 @@ const givenName = ref()
           class='input-short'
           type='text'
           label='Last Name'
+          v-on:update:is-valid="onChildValidation"
         />
       </div>
 
@@ -32,12 +70,14 @@ const givenName = ref()
         class='input-long'
         type='text'
         label='Job Position'
+        v-on:update:is-valid="onChildValidation"
       />
 
       <base-input
         class='input-long'
         type='email'
         label='Email'
+        v-on:update:is-valid="onChildValidation"
       />
 
       <base-input
