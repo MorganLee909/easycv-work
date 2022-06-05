@@ -19,9 +19,9 @@ const props = withDefaults(
     label?: string
   }>(),
   {
-    primary: true,
+    primary: false,
     secondary: false,
-    disabled: false,
+    disabled: true,
     type: 'disabled',
     label: 'Button Name'
   }
@@ -42,7 +42,7 @@ const props = withDefaults(
     background-color: unset;
   }
 
-  .primary-btn{
+  .primaryBtn{
     border: 1px solid $primary;
     background-color: $primary;
     color: $white

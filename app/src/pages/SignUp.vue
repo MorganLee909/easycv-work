@@ -12,22 +12,28 @@ const isGivenNameValid = ref(false)
 const isLastNameValid = ref(false)
 const isJobPositionValid = ref(false)
 const isEmailValid = ref(false)
+const isPasswordValid = ref(false)
 
 const onChildValidation = (value, label) => {
   if (label === 'Given Name') {
     isGivenNameValid.value = value
-    console.log('Given Name', value, label, 'isGivenNameValid.value', isGivenNameValid.value)
   }
   if (label === 'Last Name') { isLastNameValid.value = value }
   if (label === 'Job Position') { isJobPositionValid.value = value }
   if (label === 'Email') { isEmailValid.value = value }
+  if (label === 'Password') { isPasswordValid.value = value }
 
   isFormValid.value = formValidation()
   console.log('isFormValid__', isFormValid.value)
 }
 
 const formValidation = () => {
-  if (isGivenNameValid.value && isLastNameValid.value && isJobPositionValid.value && isEmailValid.value) {
+  if (
+    isGivenNameValid.value &&
+    isLastNameValid.value &&
+    isJobPositionValid.value &&
+    isEmailValid.value &&
+    isPasswordValid.value) {
     return true
   } else {
     return false
@@ -77,11 +83,12 @@ const formValidation = () => {
         class='input-long'
         type='password'
         label='Password'
+        v-on:update:is-valid="onChildValidation"
       />
 
       <base-button
         label="Next"
-        class="primary-btn"
+        :class="{primaryBtn: isFormValid}"
        />
   </form>
 

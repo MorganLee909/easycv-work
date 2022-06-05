@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults, defineEmits, ref, onMounted, watch, reactive } from 'vue'
+import { defineProps, withDefaults, defineEmits, ref } from 'vue'
 
 const watchInpute = ref('')
 const isValidInput = ref(true)
@@ -89,6 +89,18 @@ const inputValidation = (inputValue) => {
       isValidInput.value = true
       updateInputValue()
     } else {
+      isValidInput.value = false
+      updateInputValue()
+    }
+  }
+
+  if (props.type === 'password') {
+    if (/^(?=.*[a-z])(?=.*[A-Z]).{5,}$/.test(inputValue)) {
+      console.log('password is good')
+      isValidInput.value = true
+      updateInputValue()
+    } else {
+      console.log('password is bad')
       isValidInput.value = false
       updateInputValue()
     }
