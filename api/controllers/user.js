@@ -59,6 +59,8 @@ module.exports = {
     response = User
     */
     create: function(req, res){
+        console.log('req', reg.body)
+
         let email = req.body.email.toLowerCase();
         if(req.body.password.length < 10) return res.json("Password must contain at least 10 characters");
         if(helper.validEmail(email) === false) return res.json("Invalid email");

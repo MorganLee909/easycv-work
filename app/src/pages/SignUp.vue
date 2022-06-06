@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { createUser } from '../services/UserService'
 
 const givenName = ref()
 
@@ -10,7 +11,7 @@ const isFormValid = ref(false)
 
 const isGivenNameValid = ref(false)
 const isLastNameValid = ref(false)
-const isJobPositionValid = ref(false)
+// const isJobPositionValid = ref(false)
 const isEmailValid = ref(false)
 const isPasswordValid = ref(false)
 
@@ -21,9 +22,9 @@ const onChildValidation = (value, label) => {
   if (label === 'Last Name') {
     isLastNameValid.value = value
   }
-  if (label === 'Job Position') {
-    isJobPositionValid.value = value
-  }
+  // if (label === 'Job Position') {
+  //   isJobPositionValid.value = value
+  // }
   if (label === 'Email') {
     isEmailValid.value = value
   }
@@ -39,7 +40,6 @@ const formValidation = () => {
   if (
     isGivenNameValid.value &&
     isLastNameValid.value &&
-    isJobPositionValid.value &&
     isEmailValid.value &&
     isPasswordValid.value
   ) {
@@ -49,6 +49,11 @@ const formValidation = () => {
   }
 }
 
+// const createUserPost = () => {
+//   createUser('ivan').then(response => {
+//     console.log(response)
+//   })
+// }
 // const onSubmit = () => {
 //   console.log('submit form')
 // }
@@ -59,8 +64,8 @@ const formValidation = () => {
 <template>
   <header-main />
 
-  <form action="/api/user" method="post" class="signUpForm">
-    <h1 class="title-tell-us">Tell Us About Yourselft {{ givenName }}</h1>
+  <form action="/api/user" method="post" class="signUpForm" autocomplete="on">
+    <h1 class="title-tell-us">Tell Us About Yourself {{ givenName }}</h1>
 
     <div class="firstlastName">
       <base-input
@@ -78,12 +83,12 @@ const formValidation = () => {
       />
     </div>
 
-    <base-input
+    <!-- <base-input
       class="input-long"
       type="text"
       label="Job Position"
       v-on:update:is-valid="onChildValidation"
-    />
+    /> -->
 
     <base-input
       class="input-long"

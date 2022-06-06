@@ -42,14 +42,11 @@ const props = withDefaults(
       id?: string
       label?: string
       type?: string
-      inputValue: string
-      isValid: boolean
     }>(),
   {
     id: '',
     label: '',
-    type: 'text',
-    inputValue: ''
+    type: 'text'
   }
 )
 

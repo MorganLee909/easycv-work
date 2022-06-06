@@ -1,5 +1,6 @@
 <template>
-  <button class="disabled-btn">
+  <button
+    class="disabled-btn">
     {{ label }}
   </button>
 </template>
@@ -10,7 +11,6 @@ import { defineProps, withDefaults } from 'vue'
 const props = withDefaults(
   defineProps<{
     primary?: boolean;
-    secondary: boolean;
     disabled?: boolean;
     btnTypeClass?: string;
     label?: string;
@@ -18,7 +18,6 @@ const props = withDefaults(
   }>(),
   {
     primary: false,
-    secondary: false,
     disabled: true,
     type: 'disabled',
     label: 'Button Name'
