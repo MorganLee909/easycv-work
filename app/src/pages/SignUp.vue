@@ -3,33 +3,48 @@ import { ref } from 'vue'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import { createUser } from '../services/UserService'
+import { response } from 'express'
 
-const givenName = ref()
+const arrayOfInputValue = ref([])
+
+const inputValue = ref()
 
 const isFormValid = ref(false)
 
 const isGivenNameValid = ref(false)
-const isLastNameValid = ref(false)
-// const isJobPositionValid = ref(false)
-const isEmailValid = ref(false)
-const isPasswordValid = ref(false)
+const nameValue = ref()
 
-const onChildValidation = (value, label) => {
+const isLastNameValid = ref(false)
+const lastNameValue = ref()
+
+const isEmailValid = ref(false)
+const emailValue = ref()
+
+const isPasswordValid = ref(false)
+const passwordValue = ref()
+
+const onChildValidation = (isValueValid, label, inputValue) => {
+  // console.log('inputValue', inputValue)
+
   if (label === 'Given Name') {
-    isGivenNameValid.value = value
+    isGivenNameValid.value = isValueValid
+    nameValue.value = inputValue
+    console.log('inputValue Name', inputValue)
   }
   if (label === 'Last Name') {
-    isLastNameValid.value = value
+    isLastNameValid.value = isValueValid
+    lastNameValue.value = inputValue
   }
   // if (label === 'Job Position') {
   //   isJobPositionValid.value = value
   // }
   if (label === 'Email') {
-    isEmailValid.value = value
+    isEmailValid.value = isValueValid
+    emailValue.value = inputValue
   }
   if (label === 'Password') {
-    isPasswordValid.value = value
+    isPasswordValid.value = isValueValid
+    passwordValue.value = inputValue
   }
 
   isFormValid.value = formValidation()
@@ -54,18 +69,46 @@ const formValidation = () => {
 //     console.log(response)
 //   })
 // }
-// const onSubmit = () => {
-//   console.log('submit form')
-// }
+const onSubmit = (e) => {
+  // this.form.requestSubmit()
+  e.preventDefault() // it prevent from page reload
 
-// v-on:submit.prevent="onSubmit"
+  const req = {
+    firstName: nameValue.value,
+    lastName: lastNameValue.value,
+    email: emailValue.value,
+    password: passwordValue.value
+  }
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(req)
+  }
+
+  fetch('/api/user', requestOptions)
+    .then(response => response.json())
+    .then(data => console.log('data', data))
+    .catch(err => console.log('err', err))
+
+  // console.log('name', e, 'target', e.target[0], e.target[0][1])
+  // console.log('submit form', nameValue.value, lastNameValue.value, emailValue.value, passwordValue.value)
+}
+
 </script>
 
 <template>
   <header-main />
 
-  <form action="/api/user" method="post" class="signUpForm" autocomplete="on">
-    <h1 class="title-tell-us">Tell Us About Yourself {{ givenName }}</h1>
+  <!-- <form action="/api/user" method="post" class="signUpForm" autocomplete="on"> -->
+  <form
+  v-on:submit="onSubmit"
+  action="/api/user"
+  method="post"
+  class="signUpForm"
+  autocomplete="on">
+
+    <h1 class="title-tell-us">Tell Us About Yourself {{ inputValue }}</h1>
 
     <div class="firstlastName">
       <base-input
@@ -82,7 +125,6 @@ const formValidation = () => {
         v-on:update:is-valid="onChildValidation"
       />
     </div>
-
     <!-- <base-input
       class="input-long"
       type="text"

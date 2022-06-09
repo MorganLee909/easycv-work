@@ -42,6 +42,7 @@ const props = withDefaults(
       id?: string
       label?: string
       type?: string
+      value: string
     }>(),
   {
     id: '',
@@ -108,7 +109,7 @@ const emit = defineEmits<{(e: 'update:isValid', value: boolean, label: string): 
   }>()
 
 const updateInputValue = () => {
-  emit('update:isValid', isValidInput.value, props.label)
+  emit('update:isValid', isValidInput.value, props.label, watchInpute.value)
 }
 
 </script>
