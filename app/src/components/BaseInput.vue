@@ -1,15 +1,15 @@
 <template>
-  <div class="input-container" :class="{error: !isValidInput}">
+  <div class="input-container" :class="{error: !isValidInput }">
 
     <input
       @keyup="typingHandle"
       @keydown="clearTimer"
       @focus="onFocus"
-      @blur="onBlur"
+      @blur="timer(onBlur)"
       :type="type"
+      name=""
       class=""
       v-model="watchInpute"
-      required
     />
 
     <label :class="[ activeInput ? 'inputLabelActive' : '', 'inputLabel' ]">
@@ -24,6 +24,10 @@ import { defineProps, withDefaults, defineEmits, ref } from 'vue'
 const watchInpute = ref('')
 const isValidInput = ref(true)
 const activeInput = ref(false)
+
+const timer = (arg) => {
+  setTimeout(arg => 5000)
+}
 
 const onBlur = () => {
   if (watchInpute.value.length > 1) {
@@ -50,7 +54,7 @@ const props = withDefaults(
   }
 )
 
-const doneTypingInterval = 500
+const doneTypingInterval = 5000
 
 const doneTyping = () => {
   inputValidation(watchInpute.value)
@@ -75,7 +79,7 @@ const inputValidation = (inputValue) => {
       isValidInput.value = true
       updateInputValue()
     } else {
-      // console.log('Please enter a valid email address')
+      console.log('Please enter a valid email address')
       isValidInput.value = false
       updateInputValue()
     }

@@ -24,15 +24,12 @@ const onChildValidation = (isValueValid, label, inputValue) => {
   if (label === 'Given Name') {
     isGivenNameValid.value = isValueValid
     nameValue.value = inputValue
-    // console.log('inputValue Name', inputValue)
   }
   if (label === 'Last Name') {
     isLastNameValid.value = isValueValid
     lastNameValue.value = inputValue
   }
-  // if (label === 'Job Position') {
-  //   isJobPositionValid.value = value
-  // }
+
   if (label === 'Email') {
     isEmailValid.value = isValueValid
     emailValue.value = inputValue
@@ -58,7 +55,7 @@ const formValidation = () => {
   }
 }
 
-const onSubmit = (e) => {
+const onSubmit = () => {
   const req = {
     firstName: nameValue.value,
     lastName: lastNameValue.value,
@@ -73,21 +70,16 @@ const onSubmit = (e) => {
   }
 
   fetch('/api/user', requestOptions)
-    .then(response => response.json())
-    .then(data => console.log('data', data, 'user registered'))
-    .catch(err => console.log('error', err))
+    .then((response) => response.json())
+    .then((data) => console.log('data', data, 'user registered'))
+    .catch((err) => console.log('error', err))
 }
-
 </script>
 
 <template>
   <header-main />
 
-  <form
-    v-on:submit="onSubmit"
-    class="signUpForm"
-    autocomplete="on">
-
+  <form v-on:submit="onSubmit" class="signUpForm" autocomplete="off">
     <h1 class="title-tell-us">Tell Us About Yourself {{ inputValue }}</h1>
 
     <div class="firstlastName">
@@ -96,6 +88,7 @@ const onSubmit = (e) => {
         type="text"
         label="Given Name"
         v-on:update:is-valid="onChildValidation"
+        required
       />
 
       <base-input
@@ -103,20 +96,16 @@ const onSubmit = (e) => {
         type="text"
         label="Last Name"
         v-on:update:is-valid="onChildValidation"
+        required
       />
     </div>
-    <!-- <base-input
-      class="input-long"
-      type="text"
-      label="Job Position"
-      v-on:update:is-valid="onChildValidation"
-    /> -->
 
     <base-input
       class="input-long"
       type="email"
       label="Email"
       v-on:update:is-valid="onChildValidation"
+      required
     />
 
     <base-input
@@ -124,13 +113,10 @@ const onSubmit = (e) => {
       type="password"
       label="Password"
       v-on:update:is-valid="onChildValidation"
+      required
     />
 
-    <base-button
-      label="Next"
-      :class="{ primaryBtn: isFormValid }"
-      type="submit"
-    />
+    <base-button label="Next" :class="{ primaryBtn: isFormValid }" type="submit" />
   </form>
 </template>
 
