@@ -3,9 +3,6 @@ import { ref } from 'vue'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import { response } from 'express'
-
-const arrayOfInputValue = ref([])
 
 const inputValue = ref()
 
@@ -24,12 +21,10 @@ const isPasswordValid = ref(false)
 const passwordValue = ref()
 
 const onChildValidation = (isValueValid, label, inputValue) => {
-  // console.log('inputValue', inputValue)
-
   if (label === 'Given Name') {
     isGivenNameValid.value = isValueValid
     nameValue.value = inputValue
-    console.log('inputValue Name', inputValue)
+    // console.log('inputValue Name', inputValue)
   }
   if (label === 'Last Name') {
     isLastNameValid.value = isValueValid
@@ -48,7 +43,6 @@ const onChildValidation = (isValueValid, label, inputValue) => {
   }
 
   isFormValid.value = formValidation()
-  // console.log('isFormValid__', isFormValid.value)
 }
 
 const formValidation = () => {
@@ -64,15 +58,7 @@ const formValidation = () => {
   }
 }
 
-// const createUserPost = () => {
-//   createUser('ivan').then(response => {
-//     console.log(response)
-//   })
-// }
 const onSubmit = (e) => {
-  // this.form.requestSubmit()
-  e.preventDefault() // it prevent from page reload
-
   const req = {
     firstName: nameValue.value,
     lastName: lastNameValue.value,
@@ -88,11 +74,8 @@ const onSubmit = (e) => {
 
   fetch('/api/user', requestOptions)
     .then(response => response.json())
-    .then(data => console.log('data', data))
-    .catch(err => console.log('err', err))
-
-  // console.log('name', e, 'target', e.target[0], e.target[0][1])
-  // console.log('submit form', nameValue.value, lastNameValue.value, emailValue.value, passwordValue.value)
+    .then(data => console.log('data', data, 'user registered'))
+    .catch(err => console.log('error', err))
 }
 
 </script>
@@ -100,13 +83,10 @@ const onSubmit = (e) => {
 <template>
   <header-main />
 
-  <!-- <form action="/api/user" method="post" class="signUpForm" autocomplete="on"> -->
   <form
-  v-on:submit="onSubmit"
-  action="/api/user"
-  method="post"
-  class="signUpForm"
-  autocomplete="on">
+    v-on:submit="onSubmit"
+    class="signUpForm"
+    autocomplete="on">
 
     <h1 class="title-tell-us">Tell Us About Yourself {{ inputValue }}</h1>
 
@@ -150,7 +130,6 @@ const onSubmit = (e) => {
       label="Next"
       :class="{ primaryBtn: isFormValid }"
       type="submit"
-      value="Submit"
     />
   </form>
 </template>

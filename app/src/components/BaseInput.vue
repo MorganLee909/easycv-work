@@ -42,7 +42,6 @@ const props = withDefaults(
       id?: string
       label?: string
       type?: string
-      value: string
     }>(),
   {
     id: '',
