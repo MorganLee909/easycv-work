@@ -51,4 +51,4 @@ if(process.env.NODE_ENV === "production"){
     app.get("/", (req, res)=>{res.sendFile(`${__dirname}/views/index.html`)});
     httpsServer.listen(process.env.HTTPS_PORT);
 }
-app.listen(9000);
+app.listen(process.env.PORT);

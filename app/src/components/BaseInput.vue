@@ -26,7 +26,7 @@ const isValidInput = ref(true)
 const activeInput = ref(false)
 
 const timer = (arg) => {
-  setTimeout(arg => 5000)
+  setTimeout(arg => 4000)
 }
 
 const onBlur = () => {
@@ -54,7 +54,7 @@ const props = withDefaults(
   }
 )
 
-const doneTypingInterval = 5000
+const doneTypingInterval = 2000
 
 const doneTyping = () => {
   inputValidation(watchInpute.value)
