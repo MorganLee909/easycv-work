@@ -3,49 +3,35 @@
 
     <input
       @keyup="typingHandle"
-      @keydown="clearTimer"
-      @focus="onFocus"
-      @blur="timer(onBlur)"
+      @keydown="typingHandle"
+      @focus="typingHandle"
+      @blur="typingHandle"
       :type="type"
       name=""
       class=""
       v-model="watchInpute"
+      @animationstart="checkAnimation"
     />
 
     <label :class="[ activeInput ? 'inputLabelActive' : '', 'inputLabel' ]">
       {{ label }}
     </label>
+
+    <p v-if="!isValidInput" class="inputErrorMessage"> {{ message }} </p>
+
   </div>
+
 </template>
 
 <script setup lang="ts">
 import { defineProps, withDefaults, defineEmits, ref } from 'vue'
-
-const watchInpute = ref('')
-const isValidInput = ref(true)
-const activeInput = ref(false)
-
-const timer = (arg) => {
-  setTimeout(arg => 4000)
-}
-
-const onBlur = () => {
-  if (watchInpute.value.length > 1) {
-    activeInput.value = true
-  } else {
-    activeInput.value = false
-  }
-}
-
-const onFocus = () => {
-  activeInput.value = true
-}
 
 const props = withDefaults(
   defineProps<{
       id?: string
       label?: string
       type?: string
+      name: string
     }>(),
   {
     id: '',
@@ -54,33 +40,29 @@ const props = withDefaults(
   }
 )
 
-const doneTypingInterval = 2000
+const watchInpute = ref('')
+const isValidInput = ref(true)
+const activeInput = ref(false)
+const message = ref('')
 
 const doneTyping = () => {
   inputValidation(watchInpute.value)
 }
 
-const typingTimer = setTimeout(doneTyping, doneTypingInterval)
-
 const typingHandle = () => {
-  clearTimeout(typingTimer)
-  setTimeout(doneTyping, doneTypingInterval)
-}
-
-const clearTimer = () => {
-  clearTimeout(typingTimer)
+  activeInput.value = true
+  setTimeout(doneTyping, 2000)
 }
 
 const inputValidation = (inputValue) => {
   if (props.type === 'email') {
     // eslint-disable-next-line no-useless-escape
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
-      // console.log('Good Email')
       isValidInput.value = true
       updateInputValue()
     } else {
-      console.log('Please enter a valid email address')
       isValidInput.value = false
+      message.value = 'Please enter a valid email address'
       updateInputValue()
     }
   }
@@ -91,18 +73,18 @@ const inputValidation = (inputValue) => {
       updateInputValue()
     } else {
       isValidInput.value = false
+      message.value = 'Required field'
       updateInputValue()
     }
   }
 
   if (props.type === 'password') {
     if (/^(?=.*[a-z])(?=.*[A-Z]).{5,}$/.test(inputValue)) {
-      // console.log('password is good')
       isValidInput.value = true
       updateInputValue()
     } else {
-      // console.log('password is bad')
       isValidInput.value = false
+      message.value = 'Bad password'
       updateInputValue()
     }
   }
@@ -115,9 +97,30 @@ const updateInputValue = () => {
   emit('update:isValid', isValidInput.value, props.label, watchInpute.value)
 }
 
+const checkAnimation = (e: { animationName: string }) => {
+  if (e.animationName === 'on-auto-fill-start-2d998ef9') {
+    activeInput.value = true
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
+
+:-webkit-autofill {
+  animation-name: on-auto-fill-start;
+}
+
+:not(:-webkit-autofill) {
+  animation-name: on-auto-fill-cancel;
+}
+
+@keyframes on-auto-fill-start {
+}
+
+@keyframes on-auto-fill-cancel {
+}
+
 input{
   height: 50px;
   background: $white;
@@ -135,8 +138,8 @@ input{
   display: flex;
   flex-flow: column;
   position: relative;
-  margin-top: 60px;
-
+  margin-top: 30px;
+  height: 94px;
 }
 .input-short{
   width: 200px;
@@ -149,12 +152,21 @@ input{
 .error input, .error input:focus,
 .error input:active, .error input:visited, .error input:hover{
   border: 1px solid $error !important;
+  transition: .75s;
+}
+
+.inputErrorMessage{
+  font-weight: 400;
+  font-size: 12px;
+  text-align: right;
+  color: $error;
+  transition: .75s;
 }
 
 .inputLabel{
   position: absolute;
   left: 10px;
-  bottom: 15px;
+  top: 16px;
   font-size: 16px;
   color: $middleGrey;
   transition: .25s;
@@ -167,7 +179,6 @@ input{
   transform: translateY(-52px);
 }
 
-//visited
 input[type=text]:visited, input[type=email]:visited,
 input[type=password]:visited
 {

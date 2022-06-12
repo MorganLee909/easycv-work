@@ -4,8 +4,6 @@ import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
-const inputValue = ref()
-
 const isFormValid = ref(false)
 
 const isGivenNameValid = ref(false)
@@ -74,19 +72,21 @@ const onSubmit = () => {
     .then((data) => console.log('data', data, 'user registered'))
     .catch((err) => console.log('error', err))
 }
+
 </script>
 
 <template>
   <header-main />
 
   <form v-on:submit="onSubmit" class="signUpForm" autocomplete="off">
-    <h1 class="title-tell-us">Tell Us About Yourself {{ inputValue }}</h1>
+    <h1 class="title-tell-us">Tell Us About Yourself</h1>
 
     <div class="firstlastName">
       <base-input
         class="input-short"
         type="text"
         label="Given Name"
+        name="Given Name"
         v-on:update:is-valid="onChildValidation"
         required
       />
@@ -95,6 +95,7 @@ const onSubmit = () => {
         class="input-short"
         type="text"
         label="Last Name"
+        name="Last Name"
         v-on:update:is-valid="onChildValidation"
         required
       />
@@ -104,6 +105,7 @@ const onSubmit = () => {
       class="input-long"
       type="email"
       label="Email"
+      name="Email"
       v-on:update:is-valid="onChildValidation"
       required
     />
@@ -112,6 +114,7 @@ const onSubmit = () => {
       class="input-long"
       type="password"
       label="Password"
+      name="Password"
       v-on:update:is-valid="onChildValidation"
       required
     />
@@ -126,10 +129,12 @@ const onSubmit = () => {
   justify-content: center;
   flex-flow: column;
   align-items: center;
+  height: 70vh;
 }
 .title-tell-us {
   font-weight: 700;
   font-size: 25px;
+  margin-bottom: 60px;
 }
 
 .firstlastName {

@@ -43,5 +43,6 @@ const props = withDefaults(
   background-color: $primary;
   color: $white;
   cursor: pointer;
+  transition: .25s;
 }
 </style>
