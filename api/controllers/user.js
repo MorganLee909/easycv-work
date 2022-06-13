@@ -64,9 +64,9 @@ module.exports = {
         if(helper.validEmail(email) === false) return res.json("Invalid email");
 
         User.findOne({email: email})
-
             .then((user)=>{
                 if(user !== null) throw "user";
+
                 let salt = bcrypt.genSaltSync(10);
                 let hash = bcrypt.hashSync(req.body.password, salt);
 
