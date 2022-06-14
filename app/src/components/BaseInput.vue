@@ -19,6 +19,12 @@
 
     <p v-if="!isValidInput" class="inputErrorMessage"> {{ message }} </p>
 
+    <img
+    v-if="props.label === 'Password'"
+      @click="showPassword"
+      class="show-password-icon"
+      :src="eyeIcon[eyeIconIndex]"
+      />
   </div>
 
 </template>
@@ -44,6 +50,9 @@ const watchInpute = ref('')
 const isValidInput = ref(true)
 const activeInput = ref(false)
 const message = ref('')
+const isPasswordOpen = ref(false)
+const eyeIcon = ref([require('../assets/svg/eyeClose.svg'), require('../assets/svg/eyeOpen.svg')])
+const eyeIconIndex = ref(0)
 
 const doneTyping = () => {
   inputValidation(watchInpute.value)
@@ -94,13 +103,25 @@ const emit = defineEmits<{(e: 'update:isValid', value: boolean, label: string): 
   }>()
 
 const updateInputValue = () => {
-  emit('update:isValid', isValidInput.value, props.label, watchInpute.value)
+  emit('update:isValid', isValidInput.value, props.label, watchInpute.value, isPasswordOpen.value)
 }
 
 const checkAnimation = (e: { animationName: string }) => {
   if (e.animationName === 'on-auto-fill-start-2d998ef9') {
     activeInput.value = true
   }
+}
+
+const showPassword = () => {
+  isPasswordOpen.value = !isPasswordOpen.value
+
+  if (eyeIconIndex.value === 1) {
+    eyeIconIndex.value = 0
+  } else {
+    eyeIconIndex.value = 1
+  }
+
+  updateInputValue()
 }
 
 </script>
@@ -185,4 +206,12 @@ input[type=password]:visited
     background: $white;
 }
 
+.show-password-icon{
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+}
 </style>

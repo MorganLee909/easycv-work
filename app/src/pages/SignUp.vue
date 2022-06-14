@@ -17,8 +17,9 @@ const emailValue = ref()
 
 const isPasswordValid = ref(false)
 const passwordValue = ref()
+const passwordShow = ref(false)
 
-const onChildValidation = (isValueValid, label, inputValue) => {
+const onChildValidation = (isValueValid, label, inputValue, IsPasswordShow) => {
   if (label === 'Given Name') {
     isGivenNameValid.value = isValueValid
     nameValue.value = inputValue
@@ -35,6 +36,7 @@ const onChildValidation = (isValueValid, label, inputValue) => {
   if (label === 'Password') {
     isPasswordValid.value = isValueValid
     passwordValue.value = inputValue
+    passwordShow.value = IsPasswordShow
   }
 
   isFormValid.value = formValidation()
@@ -112,7 +114,7 @@ const onSubmit = () => {
 
     <base-input
       class="input-long"
-      type="password"
+      :type="passwordShow ? 'text' : 'password' "
       label="Password"
       name="Password"
       v-on:update:is-valid="onChildValidation"
