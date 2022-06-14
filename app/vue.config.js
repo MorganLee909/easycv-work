@@ -6,13 +6,16 @@ module.exports = defineConfig({
 
 module.exports = {
   devServer: {
-    proxy: {
-      '^/api': {
-        target: 'http://localhost:9000',
-        changeOrigin: true
-      }
-    }
+  //   proxy: {
+  //     '^/api': {
+  //       target: 'http://localhost:9000',
+  //       changeOrigin: true
+  //     }
+  //   }
+  // },
+    proxy: 'http://localhost:9000/'
   },
+
   css: {
     loaderOptions: {
       sass: {
