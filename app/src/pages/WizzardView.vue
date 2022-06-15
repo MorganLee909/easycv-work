@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import MainHeader from '../components/HeaderMain.vue'
+import HeaderMain from '../components/HeaderMain.vue'
 // import HelloWorld from './HelloWorld.vue'
 import MainContainer from '@/components/ContainerMain.vue'
 </script>
 
 <template>
-  <MainHeader />
+  <header-main hrefUrl="sign-in" label="Sign In" />
   <!-- <HelloWorld msg="something like or that"/> -->
   <MainContainer />
 </template>

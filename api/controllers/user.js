@@ -106,7 +106,6 @@ module.exports = {
                 switch(err){
                     case "user": return res.json("User with this email already exists");
                     default:
-                        console.error(err);
                         return res.json("ERROR: unable to create new user");
                 }
             });

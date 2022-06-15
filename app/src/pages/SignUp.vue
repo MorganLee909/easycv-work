@@ -68,6 +68,7 @@ const onSubmit = () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(req)
   }
+  // console.log('requestOptions.body', requestOptions.body)
 
   fetch('/api/user', requestOptions)
     .then((response) => response.json())
@@ -78,7 +79,7 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <header-main />
+  <header-main label="Sign In" hrefUrl="sign-in" />
 
   <form v-on:submit="onSubmit" class="signUpForm" autocomplete="off">
     <h1 class="title-tell-us">Tell Us About Yourself</h1>

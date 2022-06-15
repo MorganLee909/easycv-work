@@ -128,20 +128,6 @@ const showPassword = () => {
 
 <style scoped lang="scss">
 
-:-webkit-autofill {
-  animation-name: on-auto-fill-start;
-}
-
-:not(:-webkit-autofill) {
-  animation-name: on-auto-fill-cancel;
-}
-
-@keyframes on-auto-fill-start {
-}
-
-@keyframes on-auto-fill-cancel {
-}
-
 input{
   height: 50px;
   background: $white;

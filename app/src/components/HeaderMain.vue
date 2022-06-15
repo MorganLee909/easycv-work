@@ -1,4 +1,18 @@
 <script setup lang="ts">
+import { defineProps, withDefaults } from 'vue'
+
+const props = withDefaults(
+  defineProps<{
+      label?: string
+      hrefUrl?: string
+    }>(),
+  {
+    label: '',
+    hrefUrl: 'sign-in'
+  }
+)
+
+console.log('url', props.hrefUrl)
 </script>
 
 <template>
@@ -7,7 +21,7 @@
       <img src="../assets/svg/easyCVworkLogo.svg">
     </a>
 
-    <a href="/sign-in" class="sign-in"> Sign In </a>
+    <a :href="hrefUrl" class="sign-in"> {{ label }} </a>
   </header>
 </template>
 
