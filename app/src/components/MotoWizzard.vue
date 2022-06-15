@@ -20,7 +20,7 @@ setTimeout(() => {
     <p class="moto colorBlack">Create the Best CV</p>
     <div class="second-row-container">
       <p :class="{ moveBottom: isShowSecondRow }" class="moto colorGreen">in just Several <br> Clicks</p>
-      <a href="#/sign-up"  :class="{ showGetStarted: isShowGetStarted }" class="get-started"> Get Started --> </a>
+      <a href="/sign-up"  :class="{ showGetStarted: isShowGetStarted }" class="get-started"> Get Started --> </a>
     </div>
   </div>
 </template>

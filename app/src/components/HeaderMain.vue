@@ -3,11 +3,11 @@
 
 <template>
   <header class="main-header">
-    <a href="#/">
+    <a href="/">
       <img src="../assets/svg/easyCVworkLogo.svg">
     </a>
 
-    <a href="#/sign-in" class="sign-in"> Sign In </a>
+    <a href="/sign-in" class="sign-in"> Sign In </a>
   </header>
 </template>
 
