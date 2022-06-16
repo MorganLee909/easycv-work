@@ -12,7 +12,6 @@ const props = withDefaults(
   }
 )
 
-console.log('url', props.hrefUrl)
 </script>
 
 <template>
