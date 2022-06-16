@@ -15,19 +15,5 @@
     input:-webkit-autofill:focus {
       transition: background-color 600000s 0s, color 600000s 0s;
     }
-
-    :-webkit-autofill {
-      animation-name: on-auto-fill-start;
-    }
-
-    :not(:-webkit-autofill) {
-      animation-name: on-auto-fill-cancel;
-    }
-
-    @keyframes on-auto-fill-start {
-    }
-
-    @keyframes on-auto-fill-cancel {
-    }
   }
 </style>

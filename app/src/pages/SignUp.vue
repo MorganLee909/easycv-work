@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios from 'axios'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -56,32 +57,25 @@ const formValidation = () => {
 }
 
 const onSubmit = () => {
-  const req = {
+  axios.post('/api/user', {
     firstName: nameValue.value,
     lastName: lastNameValue.value,
     email: emailValue.value,
     password: passwordValue.value
-  }
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(req)
-  }
-  // console.log('requestOptions.body', requestOptions.body)
-
-  fetch('/api/user', requestOptions)
-    .then((response) => response.json())
-    .then((data) => console.log('data', data, 'user registered'))
-    .catch((err) => console.log('error', err))
+  })
+    .then(function (response) {
+      console.log('response', response)
+    })
+    .catch(function (error) {
+      console.log('error', error)
+    })
 }
-
 </script>
 
 <template>
   <header-main label="Sign In" hrefUrl="sign-in" />
 
-  <form v-on:submit="onSubmit" class="signUpForm" autocomplete="off">
+  <form v-on:submit.prevent="onSubmit" class="signUpForm" autocomplete="off">
     <h1 class="title-tell-us">Tell Us About Yourself</h1>
 
     <div class="firstlastName">

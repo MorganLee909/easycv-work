@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios from 'axios'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -40,32 +41,23 @@ const formValidation = () => {
 }
 
 const onSubmit = () => {
-  const req = {
+  axios.post('/api/login', {
     email: emailValue.value,
     password: passwordValue.value
-  }
-
-  // console.log(req, 'req')
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(req)
-  }
-
-  // console.log(requestOptions, 'requestOptions')
-
-  fetch('/api/login', requestOptions)
-    .then((response) => response.json())
-    .then((data) => console.log('data', data, 'user loged In'))
-    .catch((err) => console.log('error', err))
+  })
+    .then(function (response) {
+      console.log('response', response)
+    })
+    .catch(function (error) {
+      console.log('error', error)
+    })
 }
 
 </script>
 
 <template>
   <header-main label="Sign Up" hrefUrl="sign-up" />
-  <form v-on:submit="onSubmit" class="signInForm" autocomplete="off">
+  <form v-on:submit.prevent="onSubmit" class="signInForm" autocomplete="off">
     <h1 class="title-tell-us">Sign In</h1>
 
     <base-input
@@ -91,19 +83,7 @@ const onSubmit = () => {
 </template>
 
 <style lang="scss">
-  :-webkit-autofill {
-    animation-name: on-auto-fill-start;
-  }
 
-  :not(:-webkit-autofill) {
-    animation-name: on-auto-fill-cancel;
-  }
-
-  @keyframes on-auto-fill-start {
-  }
-
-  @keyframes on-auto-fill-cancel {
-  }
 .signInForm {
   display: flex;
   justify-content: center;
