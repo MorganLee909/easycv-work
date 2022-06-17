@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import WizzardViewVue from '@/pages/WizzardView.vue'
-import HeaderMainVue from '@/components/HeaderMain.vue'
 
 const routes: Array<RouteRecordRaw> = [
   // {
@@ -26,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Sign In',
     component: () => import(/* webpackChunkName: "sign up" */ '@/pages/SignIn.vue')
   }
+  // {
+  //   path: '/logged-in',
+  //   name: 'Logged In',
+  //   component: () => import(/* webpackChunkName: "sign up" */ '@/pages/LoggedIn.vue')
+  // }
 ]
 
 const router = createRouter({

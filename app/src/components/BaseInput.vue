@@ -154,6 +154,14 @@ input{
   font-size: 16px;
 }
 
+input:focus {
+  border: 1.5px solid $primary !important;
+}
+
+input:hover {
+  border: 1px solid $middleGrey;
+}
+
 .input-container{
   display: flex;
   flex-flow: column;
@@ -188,7 +196,7 @@ input{
   left: 10px;
   top: 16px;
   font-size: 16px;
-  color: $middleGrey;
+  color: $lightGrey2;
   transition: .25s;
   pointer-events: none;
 }
