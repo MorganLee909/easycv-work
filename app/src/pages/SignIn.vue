@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import router from '@/router'
 import axios from 'axios'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
@@ -47,6 +48,7 @@ const onSubmit = () => {
   })
     .then(function (response) {
       console.log('response', response)
+      router.push('/logged-in')
     })
     .catch(function (error) {
       console.log('error', error)

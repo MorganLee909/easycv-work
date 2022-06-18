@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HeaderMain from '../components/HeaderMain.vue'
-// import HelloWorld from './HelloWorld.vue'
 import MainContainer from '@/components/ContainerMain.vue'
 </script>
 
