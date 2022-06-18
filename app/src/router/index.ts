@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Wizzard',
+    name: 'Home',
     component: () => import(/* webpackChunkName: "sign up" */ '@/pages/WizzardView.vue'),
     alias: '/logout'
   },
