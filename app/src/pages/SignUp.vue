@@ -111,7 +111,7 @@ const onSubmit = () => {
       class="input-long"
       :type="passwordShow ? 'text' : 'password' "
       label="Password"
-      name="Password"
+      name="Sign Up Password"
       v-on:update:is-valid="onChildValidation"
       required
     />

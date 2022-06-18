@@ -20,7 +20,7 @@
     <p v-if="!isValidInput" class="inputErrorMessage"> {{ message }} </p>
 
     <img
-    v-if="props.label === 'Password'"
+    v-if="props.name === 'Sign Up Password'"
       @click="showPassword"
       class="show-password-icon"
       :src="eyeIcon[eyeIconIndex]"
