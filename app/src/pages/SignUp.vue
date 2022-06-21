@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
+import router from '@/router'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -64,10 +65,7 @@ const onSubmit = () => {
     password: passwordValue.value
   })
     .then(function (response) {
-      console.log('response', response)
-    })
-    .catch(function (error) {
-      console.log('error', error)
+      router.push('/logged-in')
     })
 }
 </script>

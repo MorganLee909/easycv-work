@@ -46,12 +46,11 @@ const onSubmit = () => {
     email: emailValue.value,
     password: passwordValue.value
   })
+
     .then(function (response) {
-      console.log('response', response)
-      router.push('/logged-in')
-    })
-    .catch(function (error) {
-      console.log('error', error)
+      if (typeof (response.data) !== 'string') {
+        router.push('/logged-in')
+      }
     })
 }
 
