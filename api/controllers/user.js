@@ -49,6 +49,16 @@ module.exports = {
     },
 
     /*
+    GET: retrieve data for a single user
+    Requires login
+    */
+    getOne: function(req, res){
+        res.locals.user.password = undefined;
+        res.locals.user.session = undefined;
+        return res.json(res.locals.user);
+    },
+
+    /*
     POST: initial user creation
     req.body = {
         firstName: String

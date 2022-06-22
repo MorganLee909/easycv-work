@@ -11,6 +11,7 @@ module.exports = (app)=>{
     //USER
     app.post("/api/login", user.login);
     app.get("/api/logout", user.logout);
+    app.get("/api/user", mid.user, user.getOne);
     app.post("/api/user", user.create);
     app.put("/api/user", mid.user, user.update);
 
