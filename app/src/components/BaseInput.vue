@@ -60,7 +60,7 @@ const doneTyping = () => {
 
 const typingHandle = () => {
   activeInput.value = true
-  setTimeout(doneTyping, 2000)
+  setTimeout(doneTyping, 1500)
 }
 
 const inputValidation = (inputValue) => {
@@ -87,7 +87,7 @@ const inputValidation = (inputValue) => {
     }
   }
 
-  if (props.type === 'password') {
+  if (props.label === 'Password') {
     if (/^(?=.*[a-z])(?=.*[A-Z]).{5,}$/.test(inputValue)) {
       isValidInput.value = true
       updateInputValue()
