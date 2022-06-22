@@ -18,12 +18,18 @@
             <a href="#updateCvRoute">Update CV</a>
             <h3>Employer</h3>
             <a href="#createEmployerRoute">Create Employer</a>
+            <h2>Models</h2>
+            <a href="#userModel">User</a>
+            <a href="#cvModel">CV</a>
+            <a href="#employerModel">Employer</a>
         </div>
 
         <div style="width:350px;"></div>
 
-        <div class="routes">
+        <div class="docs">
             <h1>API Docs for easycv.work</h1>
+
+            <h1>Routes</h1>
 
             <div id="loginRoute" class="route">
                 <h2><span class="method">POST:</span>/api/login</h2>
@@ -95,6 +101,50 @@
     }]
 }</code></pre>
                 <code>response = [Employer]</code>
+            </div>
+
+            <h1>Data</h1>
+
+            <div id="userModel" class="model">
+                <h2>User</h2>
+                <p>Application user</p>
+                <pre><code>{
+    email (String): user email
+    firstName (String): user first name
+    lastName (String): user last name
+    languages: [{
+        name (String): language name
+        level (String, optional): proficiency level of the language
+    }]
+    skills ([String], optional): List of skills for the user
+    cvs ([CV]): List of CV's for the user. Will always contain at least one CV
+}</code></pre>
+            </div>
+
+            <div id="cvModel" class="model">
+                <h2>CV</h2>
+                <p>A resume/CV for a specific user</p>
+                <pre><code>{
+    user (User): user that owns the CV
+    jobTitle (String): Job title of user
+    jobCategory (String): Category of job
+    experience (Number): Number of years of experience
+    skills ([String]): List of skills from user that apply to this CV,
+    workHistory: [{
+        employer (Employer): company that user worked at
+        startDate (Date): date of start of employment
+        endDate (Date): date of end of employment. Undefined if current
+        description (String): description of job performed for company
+    }]
+}</code></pre>
+            </div>
+
+            <div id="employerModel" class="model">
+                <h2>Employer</h2>
+                <p>A company or person employing people.</p>
+                <pre><code>{
+    name (String): name of employer
+}</code></pre>
             </div>
         </div>
     </body>
