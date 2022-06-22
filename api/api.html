@@ -6,96 +6,96 @@
         <link rel="stylesheet" href="/api/css">
     </head>
     <body>
-        <h1>API Docs for easycv.work</h1>
+        <div class="contents">
+            <h1>easycv.work</h1>
+            <h2>Routes</h2>
+            <h3>User</h3>
+            <a href="#loginRoute">Login</a>
+            <a href="#logoutRoute">Logout</a>
+            <a href="#createUserRoute">Create User</a>
+            <a href="#updateUserRoute">Update User</a>
+            <h3>CV</h3>
+            <a href="#updateCvRoute">Update CV</a>
+            <h3>Employer</h3>
+            <a href="#createEmployerRoute">Create Employer</a>
+        </div>
 
-        <div class="route">
-            <h2><span class="method">POST:</span>/api/login</h2>
-            <p>Logs in the user</p>
-            <pre><code>body = {
+        <div style="width:350px;"></div>
+
+        <div class="routes">
+            <h1>API Docs for easycv.work</h1>
+
+            <div id="loginRoute" class="route">
+                <h2><span class="method">POST:</span>/api/login</h2>
+                <p>Logs in the user</p>
+                <pre><code>body = {
     email (String): user email
     password (String): user password
 }</code></pre>
-            <code>response = {}</code>
-        </div>
+                <code>response = {}</code>
+            </div>
 
-        <div class="route">
-            <h2><span class="method">GET:</span>/api/logout</h2>
-            <p>Logs out the user</p>
-            <code>response = {}</code>
-        </div>
+            <div id="logoutRoute" class="route">
+                <h2><span class="method">GET:</span>/api/logout</h2>
+                <p>Logs out the user</p>
+                <code>response = {}</code>
+            </div>
 
-        <div class="route">
-            <h2><span class="method">POST:</span>/api/user</h2>
-            <p>Creates a new user. User is logged in once created. Also creates a single, blank CV</p>
-            <code>body = {
-                <ul>
-                    <li>firstName: (String) user first name</li>
-                    <li>lastName: (String) user last name</li>
-                    <li>email: (String) user email, must be unique</li>
-                    <li>password (String) user password, minumum 10 characters</li>
-                </ul>
-                }
-            </code>
-            <code>response = User</code>
-        </div>
+            <div id="createUserRoute" class="route">
+                <h2><span class="method">POST:</span>/api/user</h2>
+                <p>Creates a new user. User is logged in once created. Also creates a single, blank CV</p>
+                <pre><code>body = {
+    firstName (String): user first name
+    lastName (String): user last name
+    email (String): user email, must be unique
+    password (String): user password, minimum 10 characters
+}</code></pre>
+                <code>response = User</code>
+            </div>
 
-        <div class="route">
-            <h2><span class="method">PUT:</span>/api/user</h2>
-            <p>Updates many of the user details. NOTE: for languages and skill, if it is undefined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
-            <code>body = {
-                <ul>
-                    <li>email: (String, optional) new email address</li>
-                    <li>firstName: (String, optional) new first name</li>
-                    <li>lastName: (String, optional) new last name</li>
-                    <li>languages: (Optional)[{ 
-                        <ul>
-                            <li>name: (String, optional) language name</li>
-                            <li>level: (String, optional) language level</li>
-                        </ul>
-                        }]
-                    </li>
-                    <li>skills: ([String], Optional) user skills, must contain all skills, new and old</li>
-                </ul>
-                }
-            </code>
-            <code>response = User</code>
-        </div>
+            <div id="updateUserRoute" class="route">
+                <h2><span class="method">PUT:</span>/api/user</h2>
+                <p>Updates many of the user details. NOTE: for languages and skill, if it is undefined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
+                <pre><code>body = {
+    email (String, optional): new email address
+    firstName (String, optional): new first name
+    lastName (String, optional): new last name
+    languages (Optional): [{
+        name (String): language name,
+        level (String, optional): language level
+    }]
+    skills ([String], optional): user skills, must contain all skills, new and old
+}</code></pre>
+                <code>response = User</code>
+            </div>
 
-        <div class="route">
-            <h2><span class="method">PUT:</span>/api/cv</h2>
-            <p>Updates basic data for a CV. NOTE: for skills, if it is undefined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
-            <code>body = {
-                <ul>
-                    <li>cv: (String) id of cv to update</li>
-                    <li>jobTitle: (String, optional) job title for CV</li>
-                    <li>jobCategory: (String, optional) job category for CV</li>
-                    <li>experience: (Number, optional) years of experience in position</li>
-                    <li>skils: ([String], optional) skills applicable to CV</li>
-                </ul>
-                }
-            </code>
-            <code>response = CV</code>
-        </div>
+            <div id="updateCvRoute" class="route">
+                <h2><span class="method">PUT:</span>/api/cv</h2>
+                <p>Updates basic data for a CV. NOTE: for skills, if it is undefined/null then there will be no change. Otherwise all languages must be provided, new and existing</p>
+                <pre><code>body = {
+    cv (String): id of CV to update
+    jobTitle (String, optional): job title for CV
+    jobCategory (String, optional): job category for CV
+    experience (Number, optional): years of experience in position
+    skills ([String], optional): skill applicable to CV
+}</code></pre>
+                <code>response = CV</code>
+            </div>
 
-        <div class="route">
-            <h2><span class="method">POST:</span>/api/employer</h2>
-            <p>Creates new employers (work history) and then adds them to the provided CV.</p>
-            <code>body = {
-                <ul>
-                    <li>cv: (String) id of cv to add employers to</li>
-                    <li>employers: [{
-                        <ul>
-                            <li>name: (String) employer name</li>
-                            <li>startDate: (Date) date of start of employment</li>
-                            <li>endDate: (Date) date of end of employment. If current, ignore or use falsey value</li>
-                            <li>description: (String) description of employment</li>
-                        </ul>
-                        }]
-                    </li>
-                </ul>
-                }
-            </code>
-            <code>response = [Cv]</code>
+            <div id="createEmployerRoute" class="route">
+                <h2><span class="method">POST:</span>/api/employer</h2>
+                <p>Creates new employers (work history) and then adds them to the provided CV.</p>
+                <pre><code>body = {
+    cv (String): id of cv to add employers to
+    employers: [{
+        name (String): employer name
+        startDate (Date): date of start of employment
+        endDate (Date): date of end of employment. If current, ignore or use falsey value.
+        description (String): description of employment
+    }]
+}</code></pre>
+                <code>response = [Employer]</code>
+            </div>
         </div>
     </body>
 </html>

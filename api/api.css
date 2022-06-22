@@ -2,13 +2,47 @@
     --backColor: rgb(9, 12, 21);
     --highlite: rgb(44, 52, 55);
     --sidebar: rgb(13, 17, 29);
+    --title: rgb(44, 77, 89);
 }
 
 *{margin:0;padding:0;}
 
 body{
+    display: flex;
     background: var(--backColor);
     color: white;
+}
+
+.contents{
+    width: 350px;
+    background: rgb(12, 18, 35);
+    color: rgb(204, 204, 204);
+    padding: 15px;
+    height: 100vh;
+    position: fixed;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.contents a{
+    color: rgb(204, 204, 204);
+    text-decoration: none;
+    position: relative;
+    display: block;
+    margin: 10px;
+}
+
+.contents a:hover{
+    color: white;
+}
+
+.contents h2{
+    text-align: center;
+}
+
+.routes{
+    flex-basis: 250px;
+    flex-grow: 1;
 }
 
 h1{
@@ -17,13 +51,15 @@ h1{
 
 .route{
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
 }
 
 .route h2{
-    background: var(--highlite);
+    background: var(--title);
     margin: 35px 0 10px 0;
     padding: 5px 0;
+    width: 100%;
 }
 
 .route p{
