@@ -76,7 +76,7 @@ const inputValidation = (inputValue) => {
     }
   }
 
-  if (props.type === 'text') {
+  if (props.type === 'text' || props.name === 'Login Password') {
     if (inputValue.length > 1) {
       isValidInput.value = true
       updateInputValue()
@@ -87,7 +87,7 @@ const inputValidation = (inputValue) => {
     }
   }
 
-  if (props.label === 'Password') {
+  if (props.name === 'Sign Up Password') {
     if (/^(?=.*[a-z])(?=.*[A-Z]).{5,}$/.test(inputValue)) {
       isValidInput.value = true
       updateInputValue()

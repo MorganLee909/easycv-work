@@ -72,9 +72,9 @@ const onSubmit = () => {
 
     <base-input
       class="input-long"
-      :type="passwordShow ? 'text' : 'password' "
+      type="password"
       label="Password"
-      name="Password"
+      name="Login Password"
       v-on:update:is-valid="onChildValidation"
       required
     />
