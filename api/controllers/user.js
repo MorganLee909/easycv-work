@@ -165,7 +165,6 @@ module.exports = {
     delete: function(req, res){
         Cv.deleteMany({_id: res.locals.user.cvs})
             .then((response)=>{
-                console.log(response);
                 return User.deleteOne({_id: res.locals.user._id});
             })
             .then((response)=>{
