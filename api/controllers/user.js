@@ -155,5 +155,26 @@ module.exports = {
                 console.error(err);
                 return res.json("ERROR: unable to update user data");
             });
+    },
+
+    /*
+    DELETE: delete account of logged in user
+    requires logged in user
+    response = {}
+    */
+    delete: function(req, res){
+        Cv.deleteMany({_id: res.locals.user.cvs})
+            .then((response)=>{
+                console.log(response);
+                return User.deleteOne({_id: res.locals.user._id});
+            })
+            .then((response)=>{
+                req.session.user = undefined;
+                return res.json({});
+            })
+            .catch((err)=>{
+                console.error(err);
+                return res.json("ERROR: unable to delete user account");
+            });
     }
 }
