@@ -28,13 +28,13 @@ const props = withDefaults(
 <style scoped lang="scss">
 .disabled-btn {
   margin-top: 60px;
-  border: 1px solid $middleGrey;
+  border: 1px solid $lightGrey2;
   border-radius: 2px;
   width: 410px;
   height: 50px;
   font-weight: 600;
   font-size: 16px;
-  color: $middleGrey;
+  color: $lightGrey2;
   background-color: unset;
 }
 

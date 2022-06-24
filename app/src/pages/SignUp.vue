@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios from 'axios'
+import router from '@/router'
 import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -17,8 +19,9 @@ const emailValue = ref()
 
 const isPasswordValid = ref(false)
 const passwordValue = ref()
+const passwordShow = ref(false)
 
-const onChildValidation = (isValueValid, label, inputValue) => {
+const onChildValidation = (isValueValid, label, inputValue, IsPasswordShow) => {
   if (label === 'Given Name') {
     isGivenNameValid.value = isValueValid
     nameValue.value = inputValue
@@ -35,6 +38,7 @@ const onChildValidation = (isValueValid, label, inputValue) => {
   if (label === 'Password') {
     isPasswordValid.value = isValueValid
     passwordValue.value = inputValue
+    passwordShow.value = IsPasswordShow
   }
 
   isFormValid.value = formValidation()
@@ -54,31 +58,22 @@ const formValidation = () => {
 }
 
 const onSubmit = () => {
-  const req = {
+  axios.post('/api/user', {
     firstName: nameValue.value,
     lastName: lastNameValue.value,
     email: emailValue.value,
     password: passwordValue.value
-  }
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(req)
-  }
-
-  fetch('/api/user', requestOptions)
-    .then((response) => response.json())
-    .then((data) => console.log('data', data, 'user registered'))
-    .catch((err) => console.log('error', err))
+  })
+    .then(function (response) {
+      router.push('/logged-in')
+    })
 }
-
 </script>
 
 <template>
-  <header-main />
+  <header-main label="Sign In" hrefUrl="sign-in" />
 
-  <form v-on:submit="onSubmit" class="signUpForm" autocomplete="off">
+  <form v-on:submit.prevent="onSubmit" class="signUpForm" autocomplete="off">
     <h1 class="title-tell-us">Tell Us About Yourself</h1>
 
     <div class="firstlastName">
@@ -112,9 +107,9 @@ const onSubmit = () => {
 
     <base-input
       class="input-long"
-      type="password"
+      :type="passwordShow ? 'text' : 'password' "
       label="Password"
-      name="Password"
+      name="Sign Up Password"
       v-on:update:is-valid="onChildValidation"
       required
     />

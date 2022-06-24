@@ -19,6 +19,12 @@
 
     <p v-if="!isValidInput" class="inputErrorMessage"> {{ message }} </p>
 
+    <img
+    v-if="props.name === 'Sign Up Password'"
+      @click="showPassword"
+      class="show-password-icon"
+      :src="eyeIcon[eyeIconIndex]"
+      />
   </div>
 
 </template>
@@ -44,6 +50,9 @@ const watchInpute = ref('')
 const isValidInput = ref(true)
 const activeInput = ref(false)
 const message = ref('')
+const isPasswordOpen = ref(false)
+const eyeIcon = ref([require('../assets/svg/eyeClose.svg'), require('../assets/svg/eyeOpen.svg')])
+const eyeIconIndex = ref(0)
 
 const doneTyping = () => {
   inputValidation(watchInpute.value)
@@ -51,7 +60,7 @@ const doneTyping = () => {
 
 const typingHandle = () => {
   activeInput.value = true
-  setTimeout(doneTyping, 2000)
+  setTimeout(doneTyping, 1500)
 }
 
 const inputValidation = (inputValue) => {
@@ -67,7 +76,7 @@ const inputValidation = (inputValue) => {
     }
   }
 
-  if (props.type === 'text') {
+  if (props.type === 'text' || props.name === 'Login Password') {
     if (inputValue.length > 1) {
       isValidInput.value = true
       updateInputValue()
@@ -78,7 +87,7 @@ const inputValidation = (inputValue) => {
     }
   }
 
-  if (props.type === 'password') {
+  if (props.name === 'Sign Up Password') {
     if (/^(?=.*[a-z])(?=.*[A-Z]).{5,}$/.test(inputValue)) {
       isValidInput.value = true
       updateInputValue()
@@ -94,7 +103,7 @@ const emit = defineEmits<{(e: 'update:isValid', value: boolean, label: string): 
   }>()
 
 const updateInputValue = () => {
-  emit('update:isValid', isValidInput.value, props.label, watchInpute.value)
+  emit('update:isValid', isValidInput.value, props.label, watchInpute.value, isPasswordOpen.value)
 }
 
 const checkAnimation = (e: { animationName: string }) => {
@@ -103,13 +112,24 @@ const checkAnimation = (e: { animationName: string }) => {
   }
 }
 
+const showPassword = () => {
+  isPasswordOpen.value = !isPasswordOpen.value
+
+  if (eyeIconIndex.value === 1) {
+    eyeIconIndex.value = 0
+  } else {
+    eyeIconIndex.value = 1
+  }
+
+  updateInputValue()
+}
+
 </script>
 
 <style scoped lang="scss">
-
 :-webkit-autofill {
-  animation-name: on-auto-fill-start;
-}
+    animation-name: on-auto-fill-start;
+  }
 
 :not(:-webkit-autofill) {
   animation-name: on-auto-fill-cancel;
@@ -132,6 +152,14 @@ input{
   border: 1px solid $lightGrey;
   padding-left: 10px;
   font-size: 16px;
+}
+
+input:focus {
+  border: 1.5px solid $primary !important;
+}
+
+input:hover {
+  border: 1px solid $middleGrey;
 }
 
 .input-container{
@@ -168,7 +196,7 @@ input{
   left: 10px;
   top: 16px;
   font-size: 16px;
-  color: $middleGrey;
+  color: $lightGrey2;
   transition: .25s;
   pointer-events: none;
 }
@@ -185,4 +213,12 @@ input[type=password]:visited
     background: $white;
 }
 
+.show-password-icon{
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+}
 </style>

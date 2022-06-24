@@ -14,6 +14,7 @@ npm run serve
 ```
 npm run build
 ```
+serve -s dist
 
 ### Lints and fixes files
 ```
