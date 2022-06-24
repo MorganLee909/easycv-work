@@ -17,6 +17,7 @@
             <a href="#updateUserRoute">Update User</a>
             <a href="#deleteUserRoute">Delete User</a>
             <h3>CV</h3>
+            <a href="#createCvRoute">Create CV</a>
             <a href="#updateCvRoute">Update CV</a>
             <h3>Employer</h3>
             <a href="#createEmployerRoute">Create Employer</a>
@@ -87,6 +88,25 @@
                 <h2><span class="method">DELETE:</span>/api/user</h2>
                 <p>Deletes all data for a single user. Only works for currently logged in account. This will delete all CV's associated with the user account as well. It will also remove the user from session.</p>
                 <code>response = {}</code>
+            </div>
+
+            <div id="createCvRoute" class="route">
+                <h2><span class="method">POST:</span>/api/cv</h2>
+                <p>Create a new CV for the logged in user. Employers can either be the id of an existing employer or a newly created lawyer.</p>
+                <pre><code>body = {
+    jobTitle (String): job title for the user
+    jobCategory (String): category that job falls under
+    experience (Number): years of experience in job
+    skills ([String]): list of user skills that apply to the job
+    workHistory: [{
+        employer (String or Employer): Employer worked for. Can be the name of employer or the id of an existing employer.
+        newEmployer (Boolean): if 'employer' is the name of a non-existing employer, mark true. Mark false if employer is id of existing employer.
+        startDate (Date): date of start of employment for this position
+        endDate (Date, optional): date of end of employment. If currently employed here, leave undefined or other falsey value
+        description (String): description of job responsiblities
+    }]
+}</code></pre>
+                <code>response = CV</code>
             </div>
 
             <div id="updateCvRoute" class="route">
