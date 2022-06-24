@@ -49,6 +49,16 @@ module.exports = {
     },
 
     /*
+    GET: retrieve data for a single user
+    Requires login
+    */
+    getOne: function(req, res){
+        res.locals.user.password = undefined;
+        res.locals.user.session = undefined;
+        return res.json(res.locals.user);
+    },
+
+    /*
     POST: initial user creation
     req.body = {
         firstName: String
@@ -144,6 +154,27 @@ module.exports = {
             .catch((err)=>{
                 console.error(err);
                 return res.json("ERROR: unable to update user data");
+            });
+    },
+
+    /*
+    DELETE: delete account of logged in user
+    requires logged in user
+    response = {}
+    */
+    delete: function(req, res){
+        Cv.deleteMany({_id: res.locals.user.cvs})
+            .then((response)=>{
+                console.log(response);
+                return User.deleteOne({_id: res.locals.user._id});
+            })
+            .then((response)=>{
+                req.session.user = undefined;
+                return res.json({});
+            })
+            .catch((err)=>{
+                console.error(err);
+                return res.json("ERROR: unable to delete user account");
             });
     }
 }
