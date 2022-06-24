@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { defineProps, withDefaults } from 'vue'
+import axios from 'axios'
+import router from '@/router'
 
 const props = withDefaults(
   defineProps<{
@@ -12,6 +14,13 @@ const props = withDefaults(
   }
 )
 
+const onLogOut = () => {
+  axios.get('/api/logout')
+    .then(function (response) {
+      router.push('/')
+    })
+}
+
 </script>
 
 <template>
@@ -19,8 +28,9 @@ const props = withDefaults(
     <router-link to="/">
       <img src="../assets/svg/easyCVworkLogo.svg">
     </router-link>
+    <div v-if="props.hrefUrl === 'api/logout'" @click="onLogOut" class="sign-in"> {{ label }} </div>
 
-    <router-link :to='props.hrefUrl' class="sign-in"> {{ label }} </router-link>
+    <router-link v-if="props.hrefUrl === 'sign-in'" :to='props.hrefUrl' class="sign-in"> {{ label }} </router-link>
   </header>
 </template>
 
