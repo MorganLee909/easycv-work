@@ -8,11 +8,11 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://localhost:9000',
+        target: 'http://localhost:8000',
         changeOrigin: true
       }
     }
-  // proxy: 'http://localhost:9000/'
+  // proxy: 'http://localhost:8000'
   },
   css: {
     loaderOptions: {
