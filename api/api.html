@@ -21,6 +21,7 @@
             <a href="#retrieveManyCvRoute">Retrieve Many CV's</a>
             <a href="#createCvRoute">Create CV</a>
             <a href="#updateCvRoute">Update CV</a>
+            <a href="#deleteCvRoute">Delete CV</a>
             <h3>Employer</h3>
             <a href="#createEmployerRoute">Create Employer</a>
             <h2>Models</h2>
@@ -136,6 +137,12 @@
     skills ([String], optional): skill applicable to CV
 }</code></pre>
                 <code>response = CV</code>
+            </div>
+
+            <div id="deleteCvRoute" class="route">
+                <h2><span class="method">DELETE:</span>/api/cv/:cv</h2>
+                <p>Deletes a single cv owned by a user</p>
+                <code>response = {}</code>
             </div>
 
             <div id="createEmployerRoute" class="route">
