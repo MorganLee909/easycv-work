@@ -17,6 +17,7 @@ module.exports = (app)=>{
     app.delete("/api/user", mid.user, user.delete);
 
     //CV
+    app.get("/api/cv/:cv", cv.retrieve);
     app.post("/api/cv", mid.user, cv.create);
     app.put("/api/cv", mid.user, cv.update);
 

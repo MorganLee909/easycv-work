@@ -1,7 +1,32 @@
 const Cv = require("../models/cv.js");
 const Employer = require("../models/employer.js");
 
+const ObjectId = require("mongoose").Types.ObjectId;
+
 module.exports = {
+    /*
+    GET: retrieve a single CV
+    req.params.cv = CV id
+    response = CV
+    */
+    retrieve: function(req, res){
+        console.log(req.params.cv);
+        Cv.findOne({_id: req.params.cv})
+            .populate("user")
+            .populate("workHistory.employer")
+            .then((cv)=>{
+                cv.user.password = undefined;
+                cv.user.cvs = undefined;
+                cv.user.session = undefined;
+
+                return res.json(cv);
+            })
+            .catch((err)=>{
+                console.error(err);
+                return res.json("Error: unable to retrieve CV data");
+            });
+    },
+
     /*
     POST: create new cv for the logged in user
     req.body = {
