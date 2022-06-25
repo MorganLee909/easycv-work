@@ -24,6 +24,7 @@
             <a href="#deleteCvRoute">Delete CV</a>
             <h3>Employer</h3>
             <a href="#createEmployerRoute">Create Employer</a>
+            <a href="#searchEmployerRoute">Search Employers</a>
             <h2>Models</h2>
             <a href="#userModel">User</a>
             <a href="#cvModel">CV</a>
@@ -158,6 +159,14 @@
     }]
 }</code></pre>
                 <code>response = [Employer]</code>
+            </div>
+
+            <div id="searchEmployerRoute" class="route">
+                <h2><span class="method">GET:</span>/api/employer</h2>
+                <p>Retrieve a list of employers through a string search by name</p>
+                <pre><code>query = {
+    s (String): string to search employers by name
+}</code></pre>
             </div>
 
             <h1>Data</h1>
