@@ -7,4 +7,6 @@ const EmployerSchema = new mongoose.Schema({
     }
 });
 
+EmployerSchema.index({"name": "text"});
+
 module.exports = mongoose.model("employer", EmployerSchema);

@@ -53,5 +53,25 @@ module.exports = {
                         return res.json("ERROR: unable to add new employers");
                 }
             });
+    },
+
+     /*
+    GET: search employers based on a string
+    req.query = {
+        s: String
+    }
+    response = [Employer]
+    */
+    retrieve: function(req, res){
+        Employer.aggregate([
+            {$match: {$text: {$search: req.query.s}}}
+        ])
+            .then((employers)=>{
+                return res.json(employers);
+            })
+            .catch((err)=>{
+                console.error(err);
+                return res.json("ERROR: unable to perform search");
+            });
     }
 }

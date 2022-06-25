@@ -25,4 +25,5 @@ module.exports = (app)=>{
 
     //EMPLOYER
     app.post("/api/employer", mid.user, employer.create);
+    app.get("/api/employer*", employer.retrieve);
 }
