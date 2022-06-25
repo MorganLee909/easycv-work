@@ -18,6 +18,7 @@
             <a href="#deleteUserRoute">Delete User</a>
             <h3>CV</h3>
             <a href="#retrieveOneCvRoute">Retrieve One CV</a>
+            <a href="#retrieveManyCvRoute">Retrieve Many CV's</a>
             <a href="#createCvRoute">Create CV</a>
             <a href="#updateCvRoute">Update CV</a>
             <h3>Employer</h3>
@@ -97,6 +98,12 @@
                 <pre><code>Parameters
     cv: id for the CV to be retrieved</code></pre>
                 <code>response = CV</code>
+            </div>
+
+            <div id="retrieveManyCvRoute" class="route">
+                <h2><span class="method">GET:</span>/api/cv</h2>
+                <p>Retrieve all CV's for the logged in user. Employers in work history are populated as well.</p>
+                <code>response = [CV]</code>
             </div>
 
             <div id="createCvRoute" class="route">
