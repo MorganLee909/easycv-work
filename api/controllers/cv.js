@@ -10,7 +10,6 @@ module.exports = {
     response = CV
     */
     retrieve: function(req, res){
-        console.log(req.params.cv);
         Cv.findOne({_id: req.params.cv})
             .populate("user")
             .populate("workHistory.employer")

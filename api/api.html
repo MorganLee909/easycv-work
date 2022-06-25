@@ -17,6 +17,7 @@
             <a href="#updateUserRoute">Update User</a>
             <a href="#deleteUserRoute">Delete User</a>
             <h3>CV</h3>
+            <a href="#retrieveOneCvRoute">Retrieve One CV</a>
             <a href="#createCvRoute">Create CV</a>
             <a href="#updateCvRoute">Update CV</a>
             <h3>Employer</h3>
@@ -88,6 +89,14 @@
                 <h2><span class="method">DELETE:</span>/api/user</h2>
                 <p>Deletes all data for a single user. Only works for currently logged in account. This will delete all CV's associated with the user account as well. It will also remove the user from session.</p>
                 <code>response = {}</code>
+            </div>
+
+            <div id="retrieveOneCvRoute" class="route">
+                <h2><span class="method">GET:</span>/api/cv/:cv</h2>
+                <p>Retrieve the data for a single CV from the CV id. Non-sensitive user data is populated. Employer data is populated for each job.</p>
+                <pre><code>Parameters
+    cv: id for the CV to be retrieved</code></pre>
+                <code>response = CV</code>
             </div>
 
             <div id="createCvRoute" class="route">
