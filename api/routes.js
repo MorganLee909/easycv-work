@@ -21,6 +21,7 @@ module.exports = (app)=>{
     app.get("/api/cv", mid.user, cv.retrieveMany);
     app.post("/api/cv", mid.user, cv.create);
     app.put("/api/cv", mid.user, cv.update);
+    app.delete("/api/cv/:cv", mid.user, cv.delete);
 
     //EMPLOYER
     app.post("/api/employer", mid.user, employer.create);

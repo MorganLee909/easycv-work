@@ -135,5 +135,49 @@ module.exports = {
                         return res.json("ERROR: unable to update CV");
                 }
             });
+    },
+
+    /*
+    DELETE: delete a single cv
+    req.params = {
+        cv: CV id
+    }
+    response = {}
+    */
+    delete: function(req, res){
+        for(let i = 0; i < res.locals.user.cvs.length; i++){
+            let cv = res.locals.user.cvs[i];
+
+            if(cv.toString() === req.params.cv){
+                res.locals.user.cvs.splice(i, 1);
+
+                let cvDelete = Cv.deleteOne({_id: req.params.cv});
+
+                return Promise.all([cvDelete, res.locals.user.save()])
+                    .then((response)=>{
+                        return res.json({});
+                    })
+                    .catch((err)=>{
+                        console.error(err);
+                        return res.json("ERROR: unable to delete CV");
+                    });
+            }
+        }
+
+        return res.json("You do not have permission to delete that CV");
+
+        // Cv.findOne({_id: req.params.cv})
+        //     .then((cv)=>{
+        //         if(res.locals.user._id.toString() !== cv.user.toString()) throw "user";
+
+        //         return Cv.deleteOne({_id: cv._id});
+        //     })
+        //     .then((response)=>{
+        //         return res.json({});
+        //     })
+        //     .catch((err)=>{
+        //         console.error(err);
+        //         return res.json("ERROR: unable to delete CV");
+        //     });
     }
 }
