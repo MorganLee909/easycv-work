@@ -5,6 +5,24 @@ const ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
     /*
+    GET: retrieve all CV's for the logged in user
+    response = [CV]
+    */
+    retrieveMany: function(req, res){
+        res.locals.user.populate("cvs")
+            .then((user)=>{
+                return user.populate("cvs.workHistory.employer");
+            })
+            .then((user)=>{
+                return res.json(user);
+            })
+            .catch((err)=>{
+                console.error(err);
+                return res.json("ERROR: unable to retrieve CV's");
+            });
+    },
+
+    /*
     GET: retrieve a single CV
     req.params.cv = CV id
     response = CV
