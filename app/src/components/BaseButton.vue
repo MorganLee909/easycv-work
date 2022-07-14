@@ -1,6 +1,5 @@
 <template>
-  <button
-    class="disabled-btn">
+  <button class="disabled-btn">
     {{ label }}
   </button>
 </template>
