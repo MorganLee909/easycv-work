@@ -5,7 +5,6 @@ import MainContainer from '@/components/ContainerMain.vue'
 
 <template>
   <header-main hrefUrl="sign-in" label="Sign In" />
-  <!-- <HelloWorld msg="something like or that"/> -->
   <MainContainer />
 </template>
 
