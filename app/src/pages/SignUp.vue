@@ -6,6 +6,7 @@ import HeaderMain from '@/components/HeaderMain.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseToaster from '@/components/BaseToaster.vue'
+import BaseWizzard from '@/components/wizzard/BaseWizzard.vue'
 
 const isShowToaster = ref(false)
 const toasterType = ref()
@@ -97,6 +98,8 @@ const onSubmit = () => {
 
   <form v-on:submit.prevent="onSubmit" class="signUpForm" autocomplete="off">
     <h1 class="title-tell-us">Tell Us About Yourself</h1>
+
+    <base-wizzard></base-wizzard>
 
     <div class="firstlastName">
       <base-input class="input-short" type="text" label="Given Name" name="Given Name"

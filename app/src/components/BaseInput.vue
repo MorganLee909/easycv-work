@@ -5,7 +5,7 @@
       @keyup="typingHandle"
       @keydown="typingHandle"
       @focus="typingHandle"
-      @blur="typingHandle"
+      @blur="notFocus"
       :type="type"
       name=""
       class=""
@@ -61,6 +61,12 @@ const doneTyping = () => {
 const typingHandle = () => {
   activeInput.value = true
   setTimeout(doneTyping, 1500)
+}
+
+const notFocus = () => {
+  if (watchInpute.value.length < 1) {
+    activeInput.value = false
+  }
 }
 
 const inputValidation = (inputValue) => {
